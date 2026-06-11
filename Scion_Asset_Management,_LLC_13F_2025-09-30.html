@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scion Asset Management, LLC 13F Holdings Multi-Period Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0b0f19; color:#f3f4f6; font-family:'Outfit','Noto Sans TC',sans-serif; line-height:1.6; padding:2rem; }
+.container { max-width:1400px; margin:0 auto; }
+.hero { background:linear-gradient(135deg,rgba(22,30,49,.9),rgba(13,18,30,.9)); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:3rem; margin-bottom:2rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-50%; right:-20%; width:400px; height:400px; background:radial-gradient(circle,rgba(59,130,246,.15),transparent 70%); pointer-events:none; }
+.hero h1 { font-size:2.2rem; font-weight:700; margin-bottom:.5rem; }
+.hero p { color:#9ca3af; font-size:1.05rem; }
+.badge { display:inline-flex; align-items:center; gap:.5rem; background:rgba(59,130,246,.15); border:1px solid rgba(59,130,246,.3); padding:.35rem .9rem; border-radius:100px; font-size:.8rem; font-weight:600; color:#3b82f6; margin-bottom:1.2rem; }
+/* Custom Scrollbar - Dark Theme */
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:#0f172a; border-radius:4px; }
+::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; border:2px solid #0f172a; }
+::-webkit-scrollbar-thumb:hover { background:#475569; }
+::-webkit-scrollbar-corner { background:#0f172a; }
+* { scrollbar-width:thin; scrollbar-color:#334155 #0f172a; }
+.tabs { display:flex; gap:1rem; margin-bottom:1.5rem; overflow-x:auto; padding-bottom:10px; }
+.tab-link { background:rgba(22,30,49,.7); color:#9ca3af; border:1px solid rgba(255,255,255,.08); padding:.8rem 1.5rem; border-radius:12px; cursor:pointer; font-weight:600; transition:all .2s; white-space:nowrap; }
+.tab-link:hover { background:rgba(255,255,255,.05); color:#fff; }
+.tab-link.active { background:#3b82f6; color:#fff; border-color:#3b82f6; }
+.metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+.metric { background:rgba(22,30,49,.7); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:1.5rem; backdrop-filter:blur(12px); }
+.metric .label { font-size:.85rem; color:#9ca3af; text-transform:uppercase; margin-bottom:.4rem; }
+.metric .value { font-size:1.6rem; font-weight:700; }
+.metric .sub { font-size:.85rem; color:#9ca3af; margin-top:.3rem; }
+.section { background:rgba(22,30,49,.7); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:2rem; margin-bottom:1.5rem; backdrop-filter:blur(12px); }
+.section h2 { font-size:1.4rem; font-weight:600; margin-bottom:1.2rem; display:flex; align-items:center; gap:.6rem; border-bottom:1px solid rgba(255,255,255,.05); padding-bottom:.8rem; }
+table { width:100%; border-collapse:collapse; font-size:.95rem; }
+th { color:#9ca3af; font-weight:500; padding:.7rem .8rem; border-bottom:1px solid rgba(255,255,255,.08); font-size:.75rem; text-transform:uppercase; letter-spacing:.5px; text-align:left; }
+th.sortable { cursor:pointer; user-select:none; transition:background 0.2s; }
+th.sortable:hover { background:rgba(255,255,255,.05); }
+td { padding:.7rem .8rem; border-bottom:1px solid rgba(255,255,255,.04); }
+tr:hover td { background:rgba(255,255,255,.02); }
+.ticker { display:inline-block; font-weight:700; padding:.2rem .5rem; border-radius:6px; font-size:.8rem; }
+.ticker.put { background:rgba(244,63,94,.15); color:#f43f5e; border:1px solid rgba(244,63,94,.3); }
+.ticker.call { background:rgba(16,185,129,.15); color:#10b981; border:1px solid rgba(16,185,129,.3); }
+.ticker.common { background:rgba(59,130,246,.15); color:#3b82f6; border:1px solid rgba(59,130,246,.3); }
+.val { font-weight:600; }
+.footer { text-align:center; color:#6b7280; font-size:.8rem; margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,.05); }
+a { color:#3b82f6; text-decoration:none; } a:hover { text-decoration:underline; }
+/* Smart Money Toggle Switch */
+.smart-toggle { position:relative; display:inline-block; width:44px; height:24px; }
+.smart-toggle input { opacity:0; width:0; height:0; }
+.smart-slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#334155; border-radius:24px; transition:.3s; }
+.smart-slider::before { content:''; position:absolute; height:18px; width:18px; left:3px; bottom:3px; background:#94a3b8; border-radius:50%; transition:.3s; }
+.smart-toggle input:checked + .smart-slider { background:rgba(245,158,11,.6); }
+.smart-toggle input:checked + .smart-slider::before { transform:translateX(20px); background:#f59e0b; }
+.hm-block { border-radius:8px; padding:0.8rem; display:flex; flex-direction:column; justify-content:center; transition:all .2s; cursor:default; position:relative; overflow:visible; min-height:80px; }
+.hm-block:hover { filter:brightness(1.2); transform:scale(1.02); z-index:2; }
+.hm-tooltip { display:none; position:absolute; background:#0f172a; border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:0.6rem 0.8rem; font-size:0.8rem; z-index:10; white-space:nowrap; pointer-events:none; left:50%; transform:translateX(-50%); bottom:calc(100% + 8px); box-shadow:0 4px 12px rgba(0,0,0,.4); }
+.hm-block:hover .hm-tooltip { display:block; }
+
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 768px) {
+    body { padding: 1rem; }
+    .hero { padding: 1.5rem; }
+    .hero h1 { font-size: 1.6rem; }
+    .metric { padding: 1rem; }
+    .metric .value { font-size: 1.2rem; }
+    .section { padding: 1rem; }
+    .table-wrapper { overflow-x: auto; }
+    table { min-width: 600px; } /* Force horizontal scroll for tables on small screens */
+    .tabs { margin-bottom: 1rem; }
+    .tab-link { padding: 0.6rem 1rem; font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <span class="badge">📊 13F Historical Analytics Dashboard</span>
+        <h1>Scion Asset Management, LLC</h1>
+        <p>Interactive tracking of institutional holdings over multiple quarters.</p>
+    </div>
+
+    <div class="tabs"><button class="tab-link active" onclick="openTab(event, 'tab-overview')">📊 總覽比較</button><button class="tab-link" onclick="openTab(event, 'tab-heatmap')">🔥 行業流向熱力圖</button><button class="tab-link" onclick="openTab(event, 'tab-compare')">⚖️ 個別倉位比較</button><button class="tab-link" onclick="openTab(event, 'tab-macro')">📈 總經回測</button><button class="tab-link" onclick="openTab(event, 'tab-0')">2025-09-30</button><button class="tab-link" onclick="openTab(event, 'tab-1')">2025-06-30</button><button class="tab-link" onclick="openTab(event, 'tab-2')">2025-03-31</button><button class="tab-link" onclick="openTab(event, 'tab-3')">2024-12-31</button></div>
+    
+    <div id="tab-overview" class="tab-content" style="display:block;">
+        <div class="metrics">
+            <div class="metric">
+                <div class="label">當前 AUM</div>
+                <div class="value">$1.38B</div>
+            </div>
+            <div class="metric">
+                <div class="label">較前次變動</div>
+                <div class="value">$802.9M</div>
+            </div>
+            <div class="metric">
+                <div class="label">Top 10 持倉佔比</div>
+                <div class="value">100.0%</div>
+                <div class="sub">集中度指標 (Concentration)</div>
+            </div>
+            <div class="metric">
+                <div class="label">HHI 赫芬達爾指數</div>
+                <div class="value">4692.2</div>
+                <div class="sub">(&gt;2500 為高度集中)</div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>📈 歷史資產規模變化 (AUM)</h2>
+            <div style="position: relative; height:300px; width:100%">
+                <canvas id="aumChart"></canvas>
+            </div>
+        </div>
+    
+        <div class="section">
+            <h2>⚖️ 季度變動比較 (QoQ)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>比較期間</th>
+                        <th>前期 AUM</th>
+                        <th>後期 AUM</th>
+                        <th>變動金額</th>
+                        <th>變動比例</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                <tr>
+                    <td>2025-09-30 vs 2025-06-30</td>
+                    <td>$578.3M</td>
+                    <td>$1.38B</td>
+                    <td style="color:#10b981; font-weight:600;">+$802.9M</td>
+                    <td style="color:#10b981; font-weight:600;">+138.82%</td>
+                </tr>
+            
+                <tr>
+                    <td>2025-06-30 vs 2025-03-31</td>
+                    <td>$199.2M</td>
+                    <td>$578.3M</td>
+                    <td style="color:#10b981; font-weight:600;">+$379.1M</td>
+                    <td style="color:#10b981; font-weight:600;">+190.29%</td>
+                </tr>
+            
+                <tr>
+                    <td>2025-03-31 vs 2024-12-31</td>
+                    <td>$77.44B</td>
+                    <td>$199.2M</td>
+                    <td style="color:#f43f5e; font-weight:600;">-$77.24B</td>
+                    <td style="color:#f43f5e; font-weight:600;">-99.74%</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>🧩 行業板塊分佈 (Sector Allocation)</h2>
+            <div style="margin-bottom: 1rem; display:flex; gap: 1rem; align-items:center; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">選擇季度：</span>
+                <select id="sector-period" onchange="renderSectors()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                </select>
+            </div>
+            <div id="sector-container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.2rem; margin-top:1rem;">
+            </div>
+            <script>
+                const sectorData = [{"date": "2025-09-30", "total": 282518076.0, "sectors": [{"sec": "\u5065\u5eb7\u79d1\u6280", "val": 176800000.0, "pct": 62.58006655828988}, {"sec": "\u80fd\u6e90\u7926\u7522", "val": 61500000.0, "pct": 21.768518627459436}, {"sec": "\u91d1\u878d\u696d", "val": 26425076.0, "pct": 9.353410717691563}, {"sec": "\u96f6\u552e\u696d", "val": 17793000.0, "pct": 6.298004096559118}]}, {"date": "2025-06-30", "total": 578337040.0, "sectors": [{"sec": "\u5065\u5eb7\u79d1\u6280", "val": 238603900.0, "pct": 41.25689407685179}, {"sec": "\u96f6\u552e\u696d", "val": 175744390.0, "pct": 30.38788419984305}, {"sec": "\u79d1\u6280\u670d\u52d9", "val": 73809000.0, "pct": 12.762281316099}, {"sec": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1", "val": 70145000.0, "pct": 12.128740708013446}, {"sec": "\u96fb\u5b50\u79d1\u6280", "val": 20034750.0, "pct": 3.464199699192706}]}, {"date": "2025-03-31", "total": 13200000.0, "sectors": [{"sec": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1", "val": 13200000.0, "pct": 100.0}]}, {"date": "2024-12-31", "total": 77435131000.0, "sectors": [{"sec": "\u96f6\u552e\u696d", "val": 30393750000.0, "pct": 39.25059544355907}, {"sec": "\u5065\u5eb7\u79d1\u6280", "val": 16175000000.0, "pct": 20.888451780368268}, {"sec": "\u79d1\u6280\u670d\u52d9", "val": 14172750000.0, "pct": 18.30273910171341}, {"sec": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1", "val": 12039125000.0, "pct": 15.547368286882604}, {"sec": "\u91d1\u878d\u696d", "val": 4654506000.0, "pct": 6.010845387476648}]}];
+                function renderSectors() {
+                    const idx = parseInt(document.getElementById('sector-period').value);
+                    const data = sectorData[idx];
+                    if(!data) return;
+                    
+                    let html = '';
+                    data.sectors.forEach(s => {
+                        let color = "#3b82f6";
+                        if (s.sec.includes("電子") || s.sec.includes("科技")) color = "#8b5cf6";
+                        else if (s.sec.includes("金融")) color = "#10b981";
+                        else if (s.sec.includes("ETF")) color = "#f59e0b";
+                        else if (s.sec.includes("健康")) color = "#ec4899";
+                        else if (s.sec.includes("能源")) color = "#ef4444";
+                        else if (s.sec.includes("消費") || s.sec.includes("零售")) color = "#06b6d4";
+                        
+                        const valFmt = s.val >= 1e9 ? `$${(s.val/1e9).toFixed(2)}B` : (s.val >= 1e6 ? `$${(s.val/1e6).toFixed(1)}M` : `$${s.val.toLocaleString()}`);
+                        
+                        html += `<div style="background:rgba(255,255,255,0.02); padding:1rem; border-radius:8px; border:1px solid rgba(255,255,255,0.05);">
+                            <div style="display:flex; justify-content:space-between; font-size:0.95rem; font-weight:600; margin-bottom:0.5rem;">
+                                <span style="color:#e2e8f0;">${s.sec}</span>
+                                <span style="color:${color};">${s.pct.toFixed(1)}% (${valFmt})</span>
+                            </div>
+                            <div style="width:100%; background:rgba(255,255,255,0.05); border-radius:6px; height:10px; overflow:hidden;">
+                                <div style="width:${s.pct}%; background:${color}; height:100%; border-radius:6px;"></div>
+                            </div>
+                        </div>`;
+                    });
+                    
+                    const container = document.getElementById('sector-container');
+                    if(container) container.innerHTML = html;
+                }
+                
+                function initSectors() {
+                    let html = '';
+                    sectorData.forEach((s, i) => {
+                        html += `<option value="${i}">${s.date}</option>`;
+                    });
+                    const sel = document.getElementById('sector-period');
+                    if(sel) {
+                        sel.innerHTML = html;
+                        sel.value = 0;
+                        renderSectors();
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', initSectors);
+            </script>
+        </div>
+    </div>
+
+    <div id="tab-heatmap" class="tab-content" style="display:none;">
+        <div class="section">
+            <h2>🔥 行業資金流向熱力圖 (Capital Flow Heatmap)</h2>
+            <div style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">比較期間：</span>
+                    <select id="hm-latest" onchange="updateHeatmap()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;"></select>
+                    <span style="color:#64748b; font-size:0.9rem; font-weight:bold;">VS</span>
+                    <select id="hm-old" onchange="updateHeatmap()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;"></select>
+                </div>
+                <div style="width:1px; height:24px; background:rgba(255,255,255,0.1); margin:0 0.5rem;"></div>
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <label class="smart-toggle">
+                        <input type="checkbox" id="hm-smart" onchange="updateHeatmap()">
+                        <span class="smart-slider"></span>
+                    </label>
+                    <span style="color:#f59e0b; font-size:0.9rem; font-weight:600;">🧠 聯明錢模式 (Smart Money)</span>
+                    <span id="hm-smart-hint" style="color:#6b7280; font-size:0.8rem; display:none;">— 過濾 ETF，以股數變化率重新加權</span>
+                </div>
+            </div>
+            <div id="heatmap-container" style="min-height:300px;"></div>
+            <div id="hm-legend" style="display:flex; gap:1.5rem; margin-top:1rem; padding:0.8rem; background:rgba(255,255,255,0.02); border-radius:8px; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#166534;"></div><span style="color:#9ca3af; font-size:0.8rem;">強勁流入 (&gt;+20%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#22c55e;"></div><span style="color:#9ca3af; font-size:0.8rem;">流入 (+5~20%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#334155;"></div><span style="color:#9ca3af; font-size:0.8rem;">平穩 (-5~+5%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#ef4444;"></div><span style="color:#9ca3af; font-size:0.8rem;">流出 (-5~-20%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#7f1d1d;"></div><span style="color:#9ca3af; font-size:0.8rem;">大幅流出 (&lt;-20%)</span></div>
+            </div>
+        </div>
+    </div>
+    
+        <div id="tab-macro" class="tab-content" style="display:none;">
+            <div class="section">
+                <h2>📈 總經指標軸與市場風格因子 (Macro & Factor Overlay)</h2>
+                <p style="color:#9ca3af;font-size:0.9rem;margin-bottom:1.5rem;">分析機構在 T 季度的行業調倉，是否成功捕捉到 T+1 季度的市場變化。</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.8rem;margin-bottom:1.5rem;"><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">S&P 500</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+7.5%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">NASDAQ</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+11.8%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">VIX</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#f43f5e;margin-top:4px;">-4.2%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">10Y Treasury</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#f43f5e;margin-top:4px;">-2.6%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">DXY (USD)</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+1.1%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">Gold</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+14.5%</div>
+            </div></div><div style="display:flex;gap:1.5rem;align-items:center;margin-bottom:1.5rem;padding:1rem;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
+        <div style="text-align:center;">
+            <div style="font-size:2rem;font-weight:700;color:#f59e0b;">53.9%</div>
+            <div style="color:#9ca3af;font-size:0.8rem;">整體命中率</div>
+        </div>
+        <div style="color:#9ca3af;font-size:0.9rem;">
+            在 193 次顯著行業調倉決策中，有 104 次成功預判了 T+1 季度的行業走向。
+        </div>
+    </div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2025-06-30 調倉 → 2025-07-01 ~ 2025-09-30 驗證
+                <span style="color:#f43f5e;font-weight:600;margin-left:0.5rem;">命中率 40.0%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>零售業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+441.1%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">+10.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>非耐用消費品</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+431.4%</td>
+                <td style="color:#9ca3af;">XLP</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-4.1%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>科技服務</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">QQQ</td>
+                <td><span style="color:#10b981;font-weight:600;">+9.6%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>健康科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">XLV</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-0.1%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>電子科技</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-79.5%</td>
+                <td style="color:#9ca3af;">SMH</td>
+                <td><span style="color:#10b981;font-weight:600;">+17.0%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr></tbody></table></div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2025-03-31 調倉 → 2025-04-01 ~ 2025-06-30 驗證
+                <span style="color:#10b981;font-weight:600;margin-left:0.5rem;">命中率 60.0%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>零售業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+107.9%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">+9.8%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>健康科技</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-100.0%</td>
+                <td style="color:#9ca3af;">XLV</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-6.1%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>金融業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-100.0%</td>
+                <td style="color:#9ca3af;">XLF</td>
+                <td><span style="color:#10b981;font-weight:600;">+4.8%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>電子科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">SMH</td>
+                <td><span style="color:#10b981;font-weight:600;">+31.0%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>非耐用消費品</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+12.0%</td>
+                <td style="color:#9ca3af;">XLP</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-0.8%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr></tbody></table></div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2024-12-31 調倉 → 2025-01-01 ~ 2025-03-31 驗證
+                <span style="color:#10b981;font-weight:600;margin-left:0.5rem;">命中率 100.0%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>科技服務</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-100.0%</td>
+                <td style="color:#9ca3af;">QQQ</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-8.0%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>金融業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">XLF</td>
+                <td><span style="color:#10b981;font-weight:600;">+2.4%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>非耐用消費品</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">XLP</td>
+                <td><span style="color:#10b981;font-weight:600;">+3.1%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>零售業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-68.8%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-10.8%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>健康科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+13.9%</td>
+                <td style="color:#9ca3af;">XLV</td>
+                <td><span style="color:#10b981;font-weight:600;">+5.4%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr></tbody></table></div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2024-09-30 調倉 → 2024-10-01 ~ 2024-12-31 驗證
+                <span style="color:#10b981;font-weight:600;margin-left:0.5rem;">命中率 66.7%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>零售業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+183.7%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">+13.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>科技服務</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+81.2%</td>
+                <td style="color:#9ca3af;">QQQ</td>
+                <td><span style="color:#10b981;font-weight:600;">+7.3%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>健康科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+41.7%</td>
+                <td style="color:#9ca3af;">XLV</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-10.0%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr></tbody></table></div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div id="tab-compare" class="tab-content" style="display:none;">
+        <div class="section">
+            <h2>⚖️ 自訂季度倉位變動比較 (Diff Explorer)</h2>
+            <div style="margin-bottom: 1rem; display:flex; gap: 1rem; align-items:center; flex-wrap:wrap; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">比較期間：</span>
+                    <select id="comp-latest" onchange="updateCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                    </select>
+                    <span style="color:#64748b; font-size:0.9rem; font-weight:bold;">VS</span>
+                    <select id="comp-old" onchange="updateCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                    </select>
+                </div>
+                
+                <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">搜尋標的：</span>
+                    <input type="text" id="comp-search" onkeyup="renderCompare()" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:180px;">
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">狀態篩選：</span>
+                    <select id="comp-status" onchange="renderCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                        <option value="ALL">全部 (All)</option>
+                        <option value="NEW">建倉 (New)</option>
+                        <option value="INCREASED">增持 (Increased)</option>
+                        <option value="DECREASED">減持 (Decreased)</option>
+                        <option value="LIQUIDATED">清倉 (Liquidated)</option>
+                    </select>
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">行業篩選：</span>
+                    <select id="comp-sector" onchange="renderCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                        <option value="ALL">全部 (All)</option>
+                    </select>
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">資產類型：</span>
+                    <select id="comp-asset" onchange="renderCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                        <option value="ALL">全部 (All)</option>
+                        <option value="COMMON">股票 (Common)</option>
+                        <option value="OPTIONS">選擇權 (Options)</option>
+                        <option value="CALL">買權 (Call)</option>
+                        <option value="PUT">賣權 (Put)</option>
+                    </select>
+                </div>
+            </div>
+            <div style="overflow-x:auto;">
+                <table id="comp-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" onclick="handleSort('ticker')" data-sort="ticker">Ticker/Name</th>
+                            <th class="sortable" onclick="handleSort('sector')" data-sort="sector">行業板塊</th>
+                            <th class="sortable" onclick="handleSort('sOld')" data-sort="sOld">前期 Shares</th>
+                            <th class="sortable" onclick="handleSort('sNew')" data-sort="sNew">後期 Shares</th>
+                            <th class="sortable" onclick="handleSort('changeShares')" data-sort="changeShares">變動 Shares</th>
+                            <th class="sortable" onclick="handleSort('vNew')" data-sort="vNew">後期 Value</th>
+                            <th class="sortable" onclick="handleSort('pct')" data-sort="pct">變動比例</th>
+                            <th class="sortable" onclick="handleSort('status')" data-sort="status">狀態</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comp-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+        <div id="tab-0" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-0" onkeyup="filterPeriodTabs(0)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$1.38B</div>
+                    <div class="sub">Filing Date: 2025-11-03</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">8 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1649339/000164933925000007/0001649339-25-000007-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">100.0%</div>
+                    <div class="sub">HHI: 4692.2</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">79.5%</div>
+                    <div class="sub">金額：$1.10B (2 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$214.4M</div>
+                    <div class="sub">2 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🔴 Put Options (2 positions, $1.10B)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-puts-0"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-0', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-0', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-0', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-0', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-0', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-0', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker put">PLTR</span></td>
+                <td>5,000,000</td>
+                <td class="val">$912.1M</td>
+                <td>66.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker put">NVDA</span></td>
+                <td>1,000,000</td>
+                <td class="val">$186.6M</td>
+                <td>13.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div>
+            <div class="section">
+                <h2>🟢 Call Options (2 positions, $214.4M)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-calls-0"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-0', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-0', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-0', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-0', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-0', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-0', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker call">PFE</span></td>
+                <td>6,000,000</td>
+                <td class="val">$152.9M</td>
+                <td>11.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker call">HAL</span></td>
+                <td>2,500,000</td>
+                <td class="val">$61.5M</td>
+                <td>4.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div>
+            <div class="section">
+                <h2>🔵 Common Stock (4 positions, $68.1M)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-0"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">MOH</span></td>
+                <td>125,000</td>
+                <td class="val">$23.9M</td>
+                <td>1.7%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker common">LULU</span></td>
+                <td>100,000</td>
+                <td class="val">$17.8M</td>
+                <td>1.3%</td>
+                <td><span style="color:#10b981;font-weight:600;">+100.0%</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker common">SLM</span></td>
+                <td>480,054</td>
+                <td class="val">$13.3M</td>
+                <td>1.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker common">BRKRP</span></td>
+                <td>48,334</td>
+                <td class="val">$13.1M</td>
+                <td>1.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+        <div id="tab-1" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-1" onkeyup="filterPeriodTabs(1)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$578.3M</div>
+                    <div class="sub">Filing Date: 2025-08-14</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">15 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1649339/000187920225000038/0001879202-25-000038-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">92.4%</div>
+                    <div class="sub">HHI: 1261.6</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">0.0%</div>
+                    <div class="sub">金額：$0 (0 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$522.1M</div>
+                    <div class="sub">9 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🟢 Call Options (9 positions, $522.1M)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-calls-1"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker call">UNH</span></td>
+                <td>350,000</td>
+                <td class="val">$109.2M</td>
+                <td>18.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker call">REGN</span></td>
+                <td>200,000</td>
+                <td class="val">$105.0M</td>
+                <td>18.2%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker call">LULU</span></td>
+                <td>400,000</td>
+                <td class="val">$95.0M</td>
+                <td>16.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker call">META</span></td>
+                <td>100,000</td>
+                <td class="val">$73.8M</td>
+                <td>12.8%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker call">EL</span></td>
+                <td>500,000</td>
+                <td class="val">$40.4M</td>
+                <td>7.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker call">JD</span></td>
+                <td>1,000,000</td>
+                <td class="val">$32.6M</td>
+                <td>5.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker call">BABA</span></td>
+                <td>250,000</td>
+                <td class="val">$28.4M</td>
+                <td>4.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker call">ASML</span></td>
+                <td>25,000</td>
+                <td class="val">$20.0M</td>
+                <td>3.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker call">VFC</span></td>
+                <td>1,500,000</td>
+                <td class="val">$17.6M</td>
+                <td>3.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div>
+            <div class="section">
+                <h2>🔵 Common Stock (6 positions, $56.3M)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-1"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">EL</span></td>
+                <td>150,000</td>
+                <td class="val">$12.1M</td>
+                <td>2.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-25.0%</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker common">LULU</span></td>
+                <td>50,000</td>
+                <td class="val">$11.9M</td>
+                <td>2.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker common">BRKR</span></td>
+                <td>250,000</td>
+                <td class="val">$10.3M</td>
+                <td>1.8%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker common">REGN</span></td>
+                <td>15,000</td>
+                <td class="val">$7.9M</td>
+                <td>1.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker common">MELI</span></td>
+                <td>3,000</td>
+                <td class="val">$7.8M</td>
+                <td>1.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker common">UNH</span></td>
+                <td>20,000</td>
+                <td class="val">$6.2M</td>
+                <td>1.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+        <div id="tab-2" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-2" onkeyup="filterPeriodTabs(2)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$199.2M</div>
+                    <div class="sub">Filing Date: 2025-05-15</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">7 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1649339/000187920225000025/0001879202-25-000025-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">100.0%</div>
+                    <div class="sub">HHI: 2888.7</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">93.4%</div>
+                    <div class="sub">金額：$186.0M (6 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$0</div>
+                    <div class="sub">0 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🔴 Put Options (6 positions, $186.0M)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-puts-2"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-2', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-2', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-2', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-2', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-2', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-puts-2', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker put">NVDA</span></td>
+                <td>900,000</td>
+                <td class="val">$97.5M</td>
+                <td>49.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker put">BABA</span></td>
+                <td>200,000</td>
+                <td class="val">$26.4M</td>
+                <td>13.3%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker put">PDD HOLDINGS INC</span></td>
+                <td>200,000</td>
+                <td class="val">$23.7M</td>
+                <td>11.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker put">JD</span></td>
+                <td>400,000</td>
+                <td class="val">$16.4M</td>
+                <td>8.3%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker put">TRIP COM GROUP LTD</span></td>
+                <td>200,000</td>
+                <td class="val">$12.7M</td>
+                <td>6.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker put">BAIDU INC</span></td>
+                <td>100,000</td>
+                <td class="val">$9.2M</td>
+                <td>4.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div>
+            <div class="section">
+                <h2>🔵 Common Stock (1 positions, $13.2M)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-2"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">EL</span></td>
+                <td>200,000</td>
+                <td class="val">$13.2M</td>
+                <td>6.6%</td>
+                <td><span style="color:#10b981;font-weight:600;">+100.0%</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+        <div id="tab-3" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-3" onkeyup="filterPeriodTabs(3)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$77.44B</div>
+                    <div class="sub">Filing Date: 2025-02-14</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">13 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1649339/000187920225000012/0001879202-25-000012-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">93.7%</div>
+                    <div class="sub">HHI: 1043.1</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">0.0%</div>
+                    <div class="sub">金額：$0 (0 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$0</div>
+                    <div class="sub">0 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🔵 Common Stock (13 positions, $77.44B)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-3"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">BABA</span></td>
+                <td>150,000</td>
+                <td class="val">$12.72B</td>
+                <td>16.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker common">BAIDU INC</span></td>
+                <td>125,000</td>
+                <td class="val">$10.54B</td>
+                <td>13.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker common">JD</span></td>
+                <td>300,000</td>
+                <td class="val">$10.40B</td>
+                <td>13.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker common">EL</span></td>
+                <td>100,000</td>
+                <td class="val">$7.50B</td>
+                <td>9.7%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker common">MOH</span></td>
+                <td>25,000</td>
+                <td class="val">$7.28B</td>
+                <td>9.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker common">PDD HOLDINGS INC</span></td>
+                <td>75,000</td>
+                <td class="val">$7.27B</td>
+                <td>9.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker common">HCA</span></td>
+                <td>15,000</td>
+                <td class="val">$4.50B</td>
+                <td>5.8%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker common">BRKR</span></td>
+                <td>75,000</td>
+                <td class="val">$4.40B</td>
+                <td>5.7%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker common">VFC</span></td>
+                <td>200,000</td>
+                <td class="val">$4.29B</td>
+                <td>5.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>10</td>
+                <td><span class="ticker common">MAGN</span></td>
+                <td>200,000</td>
+                <td class="val">$3.63B</td>
+                <td>4.7%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>11</td>
+                <td><span class="ticker common">OSCR</span></td>
+                <td>200,000</td>
+                <td class="val">$2.69B</td>
+                <td>3.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>12</td>
+                <td><span class="ticker common">ACIC</span></td>
+                <td>146,100</td>
+                <td class="val">$1.97B</td>
+                <td>2.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>13</td>
+                <td><span class="ticker common">GOOS.TO</span></td>
+                <td>24,838</td>
+                <td class="val">$249.1M</td>
+                <td>0.3%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+
+    <div class="footer">
+        Generated by Whale Tracker ｜ Data Source: SEC EDGAR 13F-HR
+    </div>
+</div>
+
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Initialize Compare Tab
+const rawPeriods = [{"date": "2025-09-30", "holdings": {"PLTR (PUT)": {"shares": 5000000, "val": 912100000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "NVDA (PUT)": {"shares": 1000000, "val": 186580000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "PFE (CALL)": {"shares": 6000000, "val": 152880000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "HAL (CALL)": {"shares": 2500000, "val": 61500000.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "MOH": {"shares": 125000, "val": 23920000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "LULU": {"shares": 100000, "val": 17793000.0, "sector": "\u96f6\u552e\u696d"}, "SLM": {"shares": 480054, "val": 13287895.0, "sector": "\u91d1\u878d\u696d"}, "BRKRP": {"shares": 48334, "val": 13137181.0, "sector": "\u91d1\u878d\u696d"}}}, {"date": "2025-06-30", "holdings": {"UNH (CALL)": {"shares": 350000, "val": 109189500.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "REGN (CALL)": {"shares": 200000, "val": 105000000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "LULU (CALL)": {"shares": 400000, "val": 95032000.0, "sector": "\u96f6\u552e\u696d"}, "META (CALL)": {"shares": 100000, "val": 73809000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "EL (CALL)": {"shares": 500000, "val": 40400000.0, "sector": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1"}, "JD (CALL)": {"shares": 1000000, "val": 32640000.0, "sector": "\u96f6\u552e\u696d"}, "BABA (CALL)": {"shares": 250000, "val": 28352500.0, "sector": "\u96f6\u552e\u696d"}, "ASML (CALL)": {"shares": 25000, "val": 20034750.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "VFC (CALL)": {"shares": 1500000, "val": 17625000.0, "sector": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1"}, "EL": {"shares": 150000, "val": 12120000.0, "sector": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1"}, "LULU": {"shares": 50000, "val": 11879000.0, "sector": "\u96f6\u552e\u696d"}, "BRKR": {"shares": 250000, "val": 10300000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "REGN": {"shares": 15000, "val": 7875000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "MELI": {"shares": 3000, "val": 7840890.0, "sector": "\u96f6\u552e\u696d"}, "UNH": {"shares": 20000, "val": 6239400.0, "sector": "\u5065\u5eb7\u79d1\u6280"}}}, {"date": "2025-03-31", "holdings": {"NVDA (PUT)": {"shares": 900000, "val": 97542000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "BABA (PUT)": {"shares": 200000, "val": 26446000.0, "sector": "\u96f6\u552e\u696d"}, "PDD HOLDINGS INC (PUT)": {"shares": 200000, "val": 23670000.0, "sector": "\u96f6\u552e\u696d"}, "JD (PUT)": {"shares": 400000, "val": 16448000.0, "sector": "\u96f6\u552e\u696d"}, "TRIP COM GROUP LTD (PUT)": {"shares": 200000, "val": 12716000.0, "sector": "\u5176\u4ed6 / \u672a\u5206\u985e"}, "BAIDU INC (PUT)": {"shares": 100000, "val": 9203000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "EL": {"shares": 200000, "val": 13200000.0, "sector": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1"}}}, {"date": "2024-12-31", "holdings": {"BABA": {"shares": 150000, "val": 12718500000.0, "sector": "\u96f6\u552e\u696d"}, "BAIDU INC": {"shares": 125000, "val": 10538750000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "JD": {"shares": 300000, "val": 10401000000.0, "sector": "\u96f6\u552e\u696d"}, "EL": {"shares": 100000, "val": 7498000000.0, "sector": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1"}, "MOH": {"shares": 25000, "val": 7276250000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "PDD HOLDINGS INC": {"shares": 75000, "val": 7274250000.0, "sector": "\u96f6\u552e\u696d"}, "HCA": {"shares": 15000, "val": 4502250000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "BRKR": {"shares": 75000, "val": 4396500000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "VFC": {"shares": 200000, "val": 4292000000.0, "sector": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1"}, "MAGN": {"shares": 200000, "val": 3634000000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "OSCR": {"shares": 200000, "val": 2688000000.0, "sector": "\u91d1\u878d\u696d"}, "ACIC": {"shares": 146100, "val": 1966506000.0, "sector": "\u91d1\u878d\u696d"}, "GOOS.TO": {"shares": 24838, "val": 249125000.0, "sector": "\u975e\u8010\u7528\u6d88\u8cbb\u54c1"}}}];
+let currentDiffs = [];
+let currentSortCol = 'absChangeShares';
+let currentSortDir = -1;
+
+function initCompare() {
+    let html = '';
+    rawPeriods.forEach((p, i) => {
+        html += `<option value="${i}">${p.date}</option>`;
+    });
+    const latestSelect = document.getElementById('comp-latest');
+    const oldSelect = document.getElementById('comp-old');
+    if(latestSelect && oldSelect) {
+        latestSelect.innerHTML = html;
+        oldSelect.innerHTML = html;
+        if(rawPeriods.length > 1) {
+            latestSelect.value = 0;
+            oldSelect.value = 1;
+        }
+        updateCompare();
+    }
+}
+
+function updateCompare() {
+    const idxNew = parseInt(document.getElementById('comp-latest').value);
+    const idxOld = parseInt(document.getElementById('comp-old').value);
+    if(isNaN(idxNew) || isNaN(idxOld)) return;
+    
+    const pNew = rawPeriods[idxNew].holdings;
+    const pOld = rawPeriods[idxOld].holdings;
+    
+    const allKeys = new Set([...Object.keys(pNew), ...Object.keys(pOld)]);
+    currentDiffs = [];
+    
+    allKeys.forEach(k => {
+        const sNew = pNew[k] ? pNew[k].shares : 0;
+        const sOld = pOld[k] ? pOld[k].shares : 0;
+        const vNew = pNew[k] ? pNew[k].val : 0;
+        
+        if (sNew === sOld && sNew === 0) return;
+        if (sNew === sOld) return; // Only show changed positions
+        
+        let status = "UNCHANGED";
+        if(sOld === 0 && sNew > 0) status = "NEW";
+        else if(sNew === 0 && sOld > 0) status = "LIQUIDATED";
+        else if(sNew > sOld) status = "INCREASED";
+        else if(sNew < sOld) status = "DECREASED";
+        
+        const changeShares = sNew - sOld;
+        const pct = sOld > 0 ? (changeShares / sOld * 100) : 0;
+        const sector = pNew[k] ? pNew[k].sector : (pOld[k] ? pOld[k].sector : "其他 / 未分類");
+        
+        currentDiffs.push({
+            ticker: k,
+            sector: sector,
+            sOld, sNew, changeShares, absChangeShares: Math.abs(changeShares), vNew, pct, status
+        });
+    });
+    
+    const uniqueSectors = [...new Set(currentDiffs.map(d => d.sector))].sort();
+    const sectorSelect = document.getElementById('comp-sector');
+    if (sectorSelect) {
+        const currentVal = sectorSelect.value;
+        let html = '<option value="ALL">全部 (All)</option>';
+        uniqueSectors.forEach(s => {
+            html += `<option value="${s}">${s}</option>`;
+        });
+        sectorSelect.innerHTML = html;
+        if(uniqueSectors.includes(currentVal)) {
+            sectorSelect.value = currentVal;
+        }
+    }
+    
+    renderCompare();
+}
+
+function handleSort(col) {
+    if(currentSortCol === col) {
+        currentSortDir *= -1;
+    } else {
+        currentSortCol = col;
+        currentSortDir = -1;
+    }
+    renderCompare();
+}
+
+function renderCompare() {
+    const searchVal = (document.getElementById('comp-search').value || '').toLowerCase();
+    const statusVal = document.getElementById('comp-status').value || 'ALL';
+    const assetSelect = document.getElementById('comp-asset');
+    const assetVal = assetSelect ? assetSelect.value : 'ALL';
+    const sectorSelect = document.getElementById('comp-sector');
+    const sectorVal = sectorSelect ? sectorSelect.value : 'ALL';
+    
+    let filtered = currentDiffs.filter(d => {
+        if(statusVal !== 'ALL' && d.status !== statusVal) return false;
+        if(sectorVal !== 'ALL' && d.sector !== sectorVal) return false;
+        if(searchVal && !d.ticker.toLowerCase().includes(searchVal)) return false;
+        if(assetVal !== 'ALL') {
+            const isCall = d.ticker.includes('(CALL)');
+            const isPut = d.ticker.includes('(PUT)');
+            const isOptions = isCall || isPut;
+            
+            if(assetVal === 'COMMON' && isOptions) return false;
+            if(assetVal === 'OPTIONS' && !isOptions) return false;
+            if(assetVal === 'CALL' && !isCall) return false;
+            if(assetVal === 'PUT' && !isPut) return false;
+        }
+        return true;
+    });
+    
+    filtered.sort((a, b) => {
+        let valA = a[currentSortCol];
+        let valB = b[currentSortCol];
+        
+        if(typeof valA === 'string' && typeof valB === 'string') {
+            return valA.localeCompare(valB) * currentSortDir;
+        }
+        
+        if(valA < valB) return -1 * currentSortDir;
+        if(valA > valB) return 1 * currentSortDir;
+        return 0;
+    });
+    
+    const headers = document.querySelectorAll('#comp-table th.sortable');
+    headers.forEach(th => {
+        th.innerHTML = th.innerHTML.replace(' 🔼', '').replace(' 🔽', '');
+        if(th.getAttribute('data-sort') === currentSortCol || (currentSortCol === 'absChangeShares' && th.getAttribute('data-sort') === 'changeShares')) {
+            th.innerHTML += currentSortDir === 1 ? ' 🔼' : ' 🔽';
+        }
+    });
+    
+    let html = '';
+    filtered.forEach(d => {
+        let color = '#fff';
+        if(d.status === 'NEW' || d.status === 'INCREASED') color = '#10b981';
+        if(d.status === 'LIQUIDATED' || d.status === 'DECREASED') color = '#f43f5e';
+        
+        const pctStr = d.status === 'NEW' ? 'N/A' : (d.pct > 0 ? '+' : '') + d.pct.toFixed(1) + '%';
+        const sign = d.changeShares > 0 ? '+' : '';
+        const vNewStr = d.vNew >= 1e12 ? `$${(d.vNew/1e12).toFixed(2)}T` : (d.vNew >= 1e9 ? `$${(d.vNew/1e9).toFixed(2)}B` : `$${(d.vNew/1e6).toFixed(1)}M`);
+        
+        html += `<tr>
+            <td style="font-weight:bold;">${d.ticker}</td>
+            <td style="color:#9ca3af; font-size:0.85rem;">${d.sector}</td>
+            <td>${d.sOld.toLocaleString()}</td>
+            <td>${d.sNew.toLocaleString()}</td>
+            <td style="color:${color}; font-weight:bold;">${sign}${d.changeShares.toLocaleString()}</td>
+            <td>${d.vNew > 0 ? vNewStr : '-'}</td>
+            <td style="color:${color}; font-weight:bold;">${pctStr}</td>
+            <td><span class="ticker" style="color:${color}; border:1px solid ${color}; padding:2px 6px; border-radius:4px; font-size:10px;">${d.status}</span></td>
+        </tr>`;
+    });
+    const tbody = document.getElementById('comp-tbody');
+    if(tbody) tbody.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', initCompare);
+
+// ═══ Heatmap: Capital Flow Treemap + Smart Money Mode ═══
+const ETF_SECTORS = ['ETF / 大盤指數', 'ETF / 避險與債券'];
+
+function initHeatmap() {
+    const latestSel = document.getElementById('hm-latest');
+    const oldSel = document.getElementById('hm-old');
+    if(!latestSel || !oldSel) return;
+    let html = '';
+    rawPeriods.forEach((p, i) => {
+        html += `<option value="${i}">${p.date}</option>`;
+    });
+    latestSel.innerHTML = html;
+    oldSel.innerHTML = html;
+    if(rawPeriods.length > 1) { latestSel.value = 0; oldSel.value = 1; }
+    updateHeatmap();
+}
+
+function updateHeatmap() {
+    const idxNew = parseInt(document.getElementById('hm-latest').value);
+    const idxOld = parseInt(document.getElementById('hm-old').value);
+    const smartMode = document.getElementById('hm-smart').checked;
+    const hintEl = document.getElementById('hm-smart-hint');
+    if(hintEl) hintEl.style.display = smartMode ? 'inline' : 'none';
+    if(isNaN(idxNew) || isNaN(idxOld)) return;
+    const pNew = rawPeriods[idxNew].holdings;
+    const pOld = rawPeriods[idxOld].holdings;
+
+    // Aggregate by sector
+    const sectorFlows = {};
+    const allKeys = new Set([...Object.keys(pNew), ...Object.keys(pOld)]);
+    allKeys.forEach(k => {
+        const info = pNew[k] || pOld[k];
+        const sector = info.sector || '其他 / 未分類';
+        if(smartMode && ETF_SECTORS.includes(sector)) return;
+        if(!sectorFlows[sector]) sectorFlows[sector] = { newVal:0, oldVal:0, newShares:0, oldShares:0 };
+        sectorFlows[sector].newVal += pNew[k] ? pNew[k].val : 0;
+        sectorFlows[sector].oldVal += pOld[k] ? pOld[k].val : 0;
+        sectorFlows[sector].newShares += pNew[k] ? pNew[k].shares : 0;
+        sectorFlows[sector].oldShares += pOld[k] ? pOld[k].shares : 0;
+    });
+
+    // Compute metrics
+    const sectors = Object.entries(sectorFlows).map(([name, d]) => {
+        const valDelta = d.newVal - d.oldVal;
+        const valPct = d.oldVal > 0 ? (valDelta / d.oldVal * 100) : (d.newVal > 0 ? 100 : 0);
+        const sharesPct = d.oldShares > 0 ? ((d.newShares - d.oldShares) / d.oldShares * 100) : 0;
+        const displayPct = smartMode ? sharesPct : valPct;
+        const displayDelta = smartMode ? (d.newShares - d.oldShares) : valDelta;
+        return { name, newVal: d.newVal, delta: valDelta, pct: displayPct, rawDelta: displayDelta, size: Math.max(d.newVal, d.oldVal) };
+    });
+    sectors.sort((a, b) => b.size - a.size);
+
+    const totalSize = sectors.reduce((s, x) => s + x.size, 0);
+    if(totalSize === 0) {
+        document.getElementById('heatmap-container').innerHTML = '<p style="color:#6b7280;text-align:center;padding:2rem;">無足夠資料生成熱力圖</p>';
+        return;
+    }
+
+    // Build treemap HTML
+    let html = '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:6px; grid-auto-rows:minmax(80px, auto);">';
+    sectors.forEach(s => {
+        const sizePct = s.size / totalSize * 100;
+        const span = sizePct > 25 ? 3 : (sizePct > 12 ? 2 : 1);
+        const rowSpan = sizePct > 30 ? 2 : 1;
+        const bg = getFlowColor(s.pct);
+        const arrow = s.pct > 0 ? '↑' : (s.pct < 0 ? '↓' : '↔');
+        const sign = s.pct > 0 ? '+' : '';
+        const fmtDelta = smartMode
+            ? `${sign}${s.rawDelta.toLocaleString()} 股`
+            : (Math.abs(s.delta) >= 1e9 ? `${sign}$${(s.delta/1e9).toFixed(2)}B` : `${sign}$${(s.delta/1e6).toFixed(0)}M`);
+        const fmtVal = s.newVal >= 1e9 ? `$${(s.newVal/1e9).toFixed(1)}B` : `$${(s.newVal/1e6).toFixed(0)}M`;
+        html += `<div class="hm-block" style="grid-column:span ${span};grid-row:span ${rowSpan};background:${bg};">
+            <div style="font-weight:700;font-size:${span>=2?'1rem':'0.85rem'};color:#fff;">${s.name}</div>
+            <div style="font-size:${span>=2?'1.2rem':'0.95rem'};font-weight:700;color:#fff;margin-top:4px;">${sign}${s.pct.toFixed(1)}% ${arrow}</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,.7);margin-top:2px;">${fmtDelta}</div>
+            <div class="hm-tooltip">
+                <div style="font-weight:600;margin-bottom:4px;">${s.name}</div>
+                <div>當前規模: ${fmtVal}</div>
+                <div>淨變動: ${fmtDelta} (${sign}${s.pct.toFixed(1)}%)</div>
+                <div style="color:#9ca3af;font-size:0.75rem;margin-top:2px;">佔比: ${(s.size/totalSize*100).toFixed(1)}%${smartMode ? ' (Smart Money)' : ''}</div>
+            </div>
+        </div>`;
+    });
+    html += '</div>';
+    document.getElementById('heatmap-container').innerHTML = html;
+}
+
+function getFlowColor(pct) {
+    if(pct > 20) return 'linear-gradient(135deg, #166534, #15803d)';
+    if(pct > 5) return 'linear-gradient(135deg, #15803d, #22c55e80)';
+    if(pct > -5) return '#334155';
+    if(pct > -20) return 'linear-gradient(135deg, #dc262680, #ef4444)';
+    return 'linear-gradient(135deg, #7f1d1d, #991b1b)';
+}
+
+document.addEventListener('DOMContentLoaded', initHeatmap);
+
+// Generic table sorter for individual period tabs
+function sortTable(thElement, tableId, colIndex, isNumber, isFormattedVal) {
+    const table = document.getElementById(tableId);
+    if(!table) return;
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    let dir = thElement.getAttribute('data-dir') === 'asc' ? -1 : 1;
+    thElement.setAttribute('data-dir', dir === -1 ? 'desc' : 'asc');
+    
+    // Clear arrows from siblings
+    thElement.parentElement.querySelectorAll('th').forEach(th => th.innerHTML = th.innerHTML.replace(' 🔼', '').replace(' 🔽', ''));
+    thElement.innerHTML += dir === 1 ? ' 🔼' : ' 🔽';
+    
+    rows.sort((a, b) => {
+        let valA = a.children[colIndex].innerText.replace(/,/g, '').replace('%', '').trim();
+        let valB = b.children[colIndex].innerText.replace(/,/g, '').replace('%', '').trim();
+        
+        if(isFormattedVal) {
+            const parseVal = (str) => {
+                let v = parseFloat(str.replace(/[^0-9.-]/g, ''));
+                if(str.includes('T')) v *= 1e12;
+    if(str.includes('B')) v *= 1e9;
+                else if(str.includes('M')) v *= 1e6;
+                return isNaN(v) ? 0 : v;
+            };
+            valA = parseVal(valA);
+            valB = parseVal(valB);
+        } else if(isNumber) {
+            valA = parseFloat(valA) || 0;
+            valB = parseFloat(valB) || 0;
+        } else {
+            valA = valA.toLowerCase();
+            valB = valB.toLowerCase();
+            if (valA < valB) return -1 * dir;
+            if (valA > valB) return 1 * dir;
+            return 0;
+        }
+        
+        if (valA < valB) return -1 * dir;
+        if (valA > valB) return 1 * dir;
+        return 0;
+    });
+    
+    tbody.innerHTML = '';
+    rows.forEach(r => tbody.appendChild(r));
+    
+    // Re-assign row numbers if the first column is '#'
+    if(colIndex !== 0 && table.querySelector('th').innerText.includes('#')) {
+        Array.from(tbody.querySelectorAll('tr')).forEach((r, idx) => {
+            r.children[0].innerText = idx + 1;
+        });
+    }
+}
+
+function filterPeriodTabs(idx) {
+    const input = document.getElementById(`search-period-${idx}`).value.toLowerCase();
+    const tables = document.querySelectorAll(`#tab-${idx} table`);
+    tables.forEach(table => {
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const ticker = row.children[1].innerText.toLowerCase();
+            row.style.display = ticker.includes(input) ? '' : 'none';
+        });
+    });
+}
+
+// Initialize Chart
+const ctx = document.getElementById('aumChart');
+if(ctx) {
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["2024-12-31", "2025-03-31", "2025-06-30", "2025-09-30"],
+            datasets: [{
+                label: 'AUM (Billions USD)',
+                data: [77.435131, 0.199225, 0.57833704, 1.381198076],
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderWidth: 3,
+                pointBackgroundColor: '#3b82f6',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#3b82f6',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { color: '#f3f4f6' }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                }
+            },
+            scales: {
+                y: {
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9ca3af' }
+                },
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9ca3af' }
+                }
+            }
+        }
+    });
+}
+</script>
+</body>
+</html>
