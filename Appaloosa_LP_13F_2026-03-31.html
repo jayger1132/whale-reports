@@ -1,0 +1,2323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Appaloosa LP 13F Holdings Multi-Period Report</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0b0f19; color:#f3f4f6; font-family:'Outfit','Noto Sans TC',sans-serif; line-height:1.6; padding:2rem; }
+.container { max-width:1400px; margin:0 auto; }
+.hero { background:linear-gradient(135deg,rgba(22,30,49,.9),rgba(13,18,30,.9)); border:1px solid rgba(255,255,255,.08); border-radius:24px; padding:3rem; margin-bottom:2rem; position:relative; overflow:hidden; }
+.hero::before { content:''; position:absolute; top:-50%; right:-20%; width:400px; height:400px; background:radial-gradient(circle,rgba(59,130,246,.15),transparent 70%); pointer-events:none; }
+.hero h1 { font-size:2.2rem; font-weight:700; margin-bottom:.5rem; }
+.hero p { color:#9ca3af; font-size:1.05rem; }
+.badge { display:inline-flex; align-items:center; gap:.5rem; background:rgba(59,130,246,.15); border:1px solid rgba(59,130,246,.3); padding:.35rem .9rem; border-radius:100px; font-size:.8rem; font-weight:600; color:#3b82f6; margin-bottom:1.2rem; }
+/* Custom Scrollbar - Dark Theme */
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:#0f172a; border-radius:4px; }
+::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; border:2px solid #0f172a; }
+::-webkit-scrollbar-thumb:hover { background:#475569; }
+::-webkit-scrollbar-corner { background:#0f172a; }
+* { scrollbar-width:thin; scrollbar-color:#334155 #0f172a; }
+.tabs { display:flex; gap:1rem; margin-bottom:1.5rem; overflow-x:auto; padding-bottom:10px; }
+.tab-link { background:rgba(22,30,49,.7); color:#9ca3af; border:1px solid rgba(255,255,255,.08); padding:.8rem 1.5rem; border-radius:12px; cursor:pointer; font-weight:600; transition:all .2s; white-space:nowrap; }
+.tab-link:hover { background:rgba(255,255,255,.05); color:#fff; }
+.tab-link.active { background:#3b82f6; color:#fff; border-color:#3b82f6; }
+.metrics { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:1.5rem; margin-bottom:2rem; }
+.metric { background:rgba(22,30,49,.7); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:1.5rem; backdrop-filter:blur(12px); }
+.metric .label { font-size:.85rem; color:#9ca3af; text-transform:uppercase; margin-bottom:.4rem; }
+.metric .value { font-size:1.6rem; font-weight:700; }
+.metric .sub { font-size:.85rem; color:#9ca3af; margin-top:.3rem; }
+.section { background:rgba(22,30,49,.7); border:1px solid rgba(255,255,255,.08); border-radius:20px; padding:2rem; margin-bottom:1.5rem; backdrop-filter:blur(12px); }
+.section h2 { font-size:1.4rem; font-weight:600; margin-bottom:1.2rem; display:flex; align-items:center; gap:.6rem; border-bottom:1px solid rgba(255,255,255,.05); padding-bottom:.8rem; }
+table { width:100%; border-collapse:collapse; font-size:.95rem; }
+th { color:#9ca3af; font-weight:500; padding:.7rem .8rem; border-bottom:1px solid rgba(255,255,255,.08); font-size:.75rem; text-transform:uppercase; letter-spacing:.5px; text-align:left; }
+th.sortable { cursor:pointer; user-select:none; transition:background 0.2s; }
+th.sortable:hover { background:rgba(255,255,255,.05); }
+td { padding:.7rem .8rem; border-bottom:1px solid rgba(255,255,255,.04); }
+tr:hover td { background:rgba(255,255,255,.02); }
+.ticker { display:inline-block; font-weight:700; padding:.2rem .5rem; border-radius:6px; font-size:.8rem; }
+.ticker.put { background:rgba(244,63,94,.15); color:#f43f5e; border:1px solid rgba(244,63,94,.3); }
+.ticker.call { background:rgba(16,185,129,.15); color:#10b981; border:1px solid rgba(16,185,129,.3); }
+.ticker.common { background:rgba(59,130,246,.15); color:#3b82f6; border:1px solid rgba(59,130,246,.3); }
+.val { font-weight:600; }
+.footer { text-align:center; color:#6b7280; font-size:.8rem; margin-top:2rem; padding-top:1.5rem; border-top:1px solid rgba(255,255,255,.05); }
+a { color:#3b82f6; text-decoration:none; } a:hover { text-decoration:underline; }
+/* Smart Money Toggle Switch */
+.smart-toggle { position:relative; display:inline-block; width:44px; height:24px; }
+.smart-toggle input { opacity:0; width:0; height:0; }
+.smart-slider { position:absolute; cursor:pointer; top:0; left:0; right:0; bottom:0; background:#334155; border-radius:24px; transition:.3s; }
+.smart-slider::before { content:''; position:absolute; height:18px; width:18px; left:3px; bottom:3px; background:#94a3b8; border-radius:50%; transition:.3s; }
+.smart-toggle input:checked + .smart-slider { background:rgba(245,158,11,.6); }
+.smart-toggle input:checked + .smart-slider::before { transform:translateX(20px); background:#f59e0b; }
+.hm-block { border-radius:8px; padding:0.8rem; display:flex; flex-direction:column; justify-content:center; transition:all .2s; cursor:default; position:relative; overflow:visible; min-height:80px; }
+.hm-block:hover { filter:brightness(1.2); transform:scale(1.02); z-index:2; }
+.hm-tooltip { display:none; position:absolute; background:#0f172a; border:1px solid rgba(255,255,255,.15); border-radius:8px; padding:0.6rem 0.8rem; font-size:0.8rem; z-index:10; white-space:nowrap; pointer-events:none; left:50%; transform:translateX(-50%); bottom:calc(100% + 8px); box-shadow:0 4px 12px rgba(0,0,0,.4); }
+.hm-block:hover .hm-tooltip { display:block; }
+
+/* Mobile & Tablet Responsiveness */
+@media (max-width: 768px) {
+    body { padding: 1rem; }
+    .hero { padding: 1.5rem; }
+    .hero h1 { font-size: 1.6rem; }
+    .metric { padding: 1rem; }
+    .metric .value { font-size: 1.2rem; }
+    .section { padding: 1rem; }
+    .table-wrapper { overflow-x: auto; }
+    table { min-width: 600px; } /* Force horizontal scroll for tables on small screens */
+    .tabs { margin-bottom: 1rem; }
+    .tab-link { padding: 0.6rem 1rem; font-size: 0.85rem; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <span class="badge">📊 13F Historical Analytics Dashboard</span>
+        <h1>Appaloosa LP</h1>
+        <p>Interactive tracking of institutional holdings over multiple quarters.</p>
+    </div>
+
+    <div class="tabs"><button class="tab-link active" onclick="openTab(event, 'tab-overview')">📊 總覽比較</button><button class="tab-link" onclick="openTab(event, 'tab-heatmap')">🔥 行業流向熱力圖</button><button class="tab-link" onclick="openTab(event, 'tab-compare')">⚖️ 個別倉位比較</button><button class="tab-link" onclick="openTab(event, 'tab-macro')">📈 總經回測</button><button class="tab-link" onclick="openTab(event, 'tab-0')">2026-03-31</button><button class="tab-link" onclick="openTab(event, 'tab-1')">2025-12-31</button><button class="tab-link" onclick="openTab(event, 'tab-2')">2025-09-30</button><button class="tab-link" onclick="openTab(event, 'tab-3')">2025-06-30</button></div>
+    
+    <div id="tab-overview" class="tab-content" style="display:block;">
+        <div class="metrics">
+            <div class="metric">
+                <div class="label">當前 AUM</div>
+                <div class="value">$5.93B</div>
+            </div>
+            <div class="metric">
+                <div class="label">較前次變動</div>
+                <div class="value">-$991.5M</div>
+            </div>
+            <div class="metric">
+                <div class="label">Top 10 持倉佔比</div>
+                <div class="value">74.3%</div>
+                <div class="sub">集中度指標 (Concentration)</div>
+            </div>
+            <div class="metric">
+                <div class="label">HHI 赫芬達爾指數</div>
+                <div class="value">698.6</div>
+                <div class="sub">(&gt;2500 為高度集中)</div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>📈 歷史資產規模變化 (AUM)</h2>
+            <div style="position: relative; height:300px; width:100%">
+                <canvas id="aumChart"></canvas>
+            </div>
+        </div>
+    
+        <div class="section">
+            <h2>⚖️ 季度變動比較 (QoQ)</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>比較期間</th>
+                        <th>前期 AUM</th>
+                        <th>後期 AUM</th>
+                        <th>變動金額</th>
+                        <th>變動比例</th>
+                    </tr>
+                </thead>
+                <tbody>
+        
+                <tr>
+                    <td>2026-03-31 vs 2025-12-31</td>
+                    <td>$6.93B</td>
+                    <td>$5.93B</td>
+                    <td style="color:#f43f5e; font-weight:600;">-$991.5M</td>
+                    <td style="color:#f43f5e; font-weight:600;">-14.32%</td>
+                </tr>
+            
+                <tr>
+                    <td>2025-12-31 vs 2025-09-30</td>
+                    <td>$7.38B</td>
+                    <td>$6.93B</td>
+                    <td style="color:#f43f5e; font-weight:600;">-$458.6M</td>
+                    <td style="color:#f43f5e; font-weight:600;">-6.21%</td>
+                </tr>
+            
+                <tr>
+                    <td>2025-09-30 vs 2025-06-30</td>
+                    <td>$6.45B</td>
+                    <td>$7.38B</td>
+                    <td style="color:#10b981; font-weight:600;">+$934.6M</td>
+                    <td style="color:#10b981; font-weight:600;">+14.49%</td>
+                </tr>
+            
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>🧩 行業板塊分佈 (Sector Allocation)</h2>
+            <div style="margin-bottom: 1rem; display:flex; gap: 1rem; align-items:center; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">選擇季度：</span>
+                <select id="sector-period" onchange="renderSectors()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                </select>
+            </div>
+            <div id="sector-container" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.2rem; margin-top:1rem;">
+            </div>
+            <script>
+                const sectorData = [{"date": "2026-03-31", "total": 5933477986.0, "sectors": [{"sec": "\u96f6\u552e\u696d", "val": 1464996150.0, "pct": 24.690344406040577}, {"sec": "\u96fb\u5b50\u79d1\u6280", "val": 1407757509.0, "pct": 23.725671727806088}, {"sec": "\u79d1\u6280\u670d\u52d9", "val": 1312718699.0, "pct": 22.12393308102517}, {"sec": "\u516c\u7528\u4e8b\u696d", "val": 557488524.0, "pct": 9.3956449373435}, {"sec": "\u5176\u4ed6 / \u672a\u5206\u985e", "val": 448628625.0, "pct": 7.560972267168364}, {"sec": "ETF / \u5927\u76e4\u6307\u6578", "val": 325928400.0, "pct": 5.493041362402048}, {"sec": "\u822a\u592a\u8207\u570b\u9632", "val": 134311500.0, "pct": 2.263621779956158}, {"sec": "\u8010\u7528\u6d88\u8cbb\u54c1", "val": 105144000.0, "pct": 1.7720466857395705}, {"sec": "\u80fd\u6e90\u7926\u7522", "val": 59094605.0, "pct": 0.9959522077849333}, {"sec": "\u5de5\u696d\u8207\u88fd\u9020", "val": 49475070.0, "pct": 0.8338291659080236}, {"sec": "\u904b\u8f38\u696d", "val": 35910000.0, "pct": 0.6052099642861977}]}, {"date": "2025-12-31", "total": 6925020650.0, "sectors": [{"sec": "\u96f6\u552e\u696d", "val": 1576739427.0, "pct": 22.768732494682165}, {"sec": "\u79d1\u6280\u670d\u52d9", "val": 1424895948.0, "pct": 20.576053415811835}, {"sec": "\u96fb\u5b50\u79d1\u6280", "val": 1359076212.0, "pct": 19.62559074823842}, {"sec": "\u516c\u7528\u4e8b\u696d", "val": 413610450.0, "pct": 5.972696269143977}, {"sec": "ETF / \u5927\u76e4\u6307\u6578", "val": 385665375.0, "pct": 5.5691584833035845}, {"sec": "\u8010\u7528\u6d88\u8cbb\u54c1", "val": 377744900.0, "pct": 5.454783734110598}, {"sec": "\u904b\u8f38\u696d", "val": 375486800.0, "pct": 5.422175889107277}, {"sec": "\u5176\u4ed6 / \u672a\u5206\u985e", "val": 343395700.0, "pct": 4.958767884684936}, {"sec": "\u822a\u592a\u8207\u570b\u9632", "val": 178303150.0, "pct": 2.5747670514166625}, {"sec": "\u5de5\u696d\u8207\u88fd\u9020", "val": 169878500.0, "pct": 2.4531118185185483}, {"sec": "\u5065\u5eb7\u79d1\u6280", "val": 129136800.0, "pct": 1.8647857750431402}, {"sec": "\u91d1\u878d\u696d", "val": 121464000.0, "pct": 1.7539875494811703}, {"sec": "\u80fd\u6e90\u7926\u7522", "val": 69623388.0, "pct": 1.0053888864576888}]}, {"date": "2025-09-30", "total": 7383589018.0, "sectors": [{"sec": "\u96f6\u552e\u696d", "val": 2157390000.0, "pct": 29.218717276119122}, {"sec": "\u79d1\u6280\u670d\u52d9", "val": 1341970125.0, "pct": 18.175038206060673}, {"sec": "\u96fb\u5b50\u79d1\u6280", "val": 1043780210.0, "pct": 14.136488467267505}, {"sec": "\u516c\u7528\u4e8b\u696d", "val": 546766900.0, "pct": 7.405164326820879}, {"sec": "\u8010\u7528\u6d88\u8cbb\u54c1", "val": 491567780.0, "pct": 6.657572337810745}, {"sec": "ETF / \u5927\u76e4\u6307\u6578", "val": 356539400.0, "pct": 4.8288088506932665}, {"sec": "\u91d1\u878d\u696d", "val": 332016400.0, "pct": 4.496680397440832}, {"sec": "\u5176\u4ed6 / \u672a\u5206\u985e", "val": 322787300.0, "pct": 4.37168562894138}, {"sec": "\u904b\u8f38\u696d", "val": 298104125.0, "pct": 4.03738783772052}, {"sec": "\u822a\u592a\u8207\u570b\u9632", "val": 176877635.0, "pct": 2.395550924744062}, {"sec": "\u5065\u5eb7\u79d1\u6280", "val": 124401450.0, "pct": 1.6848371394552069}, {"sec": "\u80fd\u6e90\u7926\u7522", "val": 111789403.0, "pct": 1.514025262341599}, {"sec": "\u6d88\u8cbb\u8005\u670d\u52d9", "val": 56752500.0, "pct": 0.768630267227043}]}, {"date": "2025-06-30", "total": 6448959614.0, "sectors": [{"sec": "\u96f6\u552e\u696d", "val": 1831652204.0, "pct": 28.402289882908853}, {"sec": "\u79d1\u6280\u670d\u52d9", "val": 1152995500.0, "pct": 17.878783075288148}, {"sec": "\u5065\u5eb7\u79d1\u6280", "val": 811603500.0, "pct": 12.58502996728489}, {"sec": "\u96fb\u5b50\u79d1\u6280", "val": 800170550.0, "pct": 12.407746332647447}, {"sec": "\u516c\u7528\u4e8b\u696d", "val": 666806400.0, "pct": 10.33975152445419}, {"sec": "\u5176\u4ed6 / \u672a\u5206\u985e", "val": 275749724.0, "pct": 4.275879219360855}, {"sec": "\u904b\u8f38\u696d", "val": 196925500.0, "pct": 3.0536010734583585}, {"sec": "ETF / \u5927\u76e4\u6307\u6578", "val": 174080000.0, "pct": 2.699350134277333}, {"sec": "\u822a\u592a\u8207\u570b\u9632", "val": 173215700.0, "pct": 2.6859479725065616}, {"sec": "\u80fd\u6e90\u7926\u7522", "val": 119673206.0, "pct": 1.8556978669893094}, {"sec": "\u91d1\u878d\u696d", "val": 117120000.0, "pct": 1.8161068918115881}, {"sec": "\u6d88\u8cbb\u8005\u670d\u52d9", "val": 59619000.0, "pct": 0.9244746993076767}, {"sec": "\u8010\u7528\u6d88\u8cbb\u54c1", "val": 42738330.0, "pct": 0.6627166637424688}]}];
+                function renderSectors() {
+                    const idx = parseInt(document.getElementById('sector-period').value);
+                    const data = sectorData[idx];
+                    if(!data) return;
+                    
+                    let html = '';
+                    data.sectors.forEach(s => {
+                        let color = "#3b82f6";
+                        if (s.sec.includes("電子") || s.sec.includes("科技")) color = "#8b5cf6";
+                        else if (s.sec.includes("金融")) color = "#10b981";
+                        else if (s.sec.includes("ETF")) color = "#f59e0b";
+                        else if (s.sec.includes("健康")) color = "#ec4899";
+                        else if (s.sec.includes("能源")) color = "#ef4444";
+                        else if (s.sec.includes("消費") || s.sec.includes("零售")) color = "#06b6d4";
+                        
+                        const valFmt = s.val >= 1e9 ? `$${(s.val/1e9).toFixed(2)}B` : (s.val >= 1e6 ? `$${(s.val/1e6).toFixed(1)}M` : `$${s.val.toLocaleString()}`);
+                        
+                        html += `<div style="background:rgba(255,255,255,0.02); padding:1rem; border-radius:8px; border:1px solid rgba(255,255,255,0.05);">
+                            <div style="display:flex; justify-content:space-between; font-size:0.95rem; font-weight:600; margin-bottom:0.5rem;">
+                                <span style="color:#e2e8f0;">${s.sec}</span>
+                                <span style="color:${color};">${s.pct.toFixed(1)}% (${valFmt})</span>
+                            </div>
+                            <div style="width:100%; background:rgba(255,255,255,0.05); border-radius:6px; height:10px; overflow:hidden;">
+                                <div style="width:${s.pct}%; background:${color}; height:100%; border-radius:6px;"></div>
+                            </div>
+                        </div>`;
+                    });
+                    
+                    const container = document.getElementById('sector-container');
+                    if(container) container.innerHTML = html;
+                }
+                
+                function initSectors() {
+                    let html = '';
+                    sectorData.forEach((s, i) => {
+                        html += `<option value="${i}">${s.date}</option>`;
+                    });
+                    const sel = document.getElementById('sector-period');
+                    if(sel) {
+                        sel.innerHTML = html;
+                        sel.value = 0;
+                        renderSectors();
+                    }
+                }
+                document.addEventListener('DOMContentLoaded', initSectors);
+            </script>
+        </div>
+    </div>
+
+    <div id="tab-heatmap" class="tab-content" style="display:none;">
+        <div class="section">
+            <h2>🔥 行業資金流向熱力圖 (Capital Flow Heatmap)</h2>
+            <div style="margin-bottom:1rem; display:flex; gap:1rem; align-items:center; flex-wrap:wrap; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">比較期間：</span>
+                    <select id="hm-latest" onchange="updateHeatmap()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;"></select>
+                    <span style="color:#64748b; font-size:0.9rem; font-weight:bold;">VS</span>
+                    <select id="hm-old" onchange="updateHeatmap()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;"></select>
+                </div>
+                <div style="width:1px; height:24px; background:rgba(255,255,255,0.1); margin:0 0.5rem;"></div>
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <label class="smart-toggle">
+                        <input type="checkbox" id="hm-smart" onchange="updateHeatmap()">
+                        <span class="smart-slider"></span>
+                    </label>
+                    <span style="color:#f59e0b; font-size:0.9rem; font-weight:600;">🧠 聯明錢模式 (Smart Money)</span>
+                    <span id="hm-smart-hint" style="color:#6b7280; font-size:0.8rem; display:none;">— 過濾 ETF，以股數變化率重新加權</span>
+                </div>
+            </div>
+            <div id="heatmap-container" style="min-height:300px;"></div>
+            <div id="hm-legend" style="display:flex; gap:1.5rem; margin-top:1rem; padding:0.8rem; background:rgba(255,255,255,0.02); border-radius:8px; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#166534;"></div><span style="color:#9ca3af; font-size:0.8rem;">強勁流入 (&gt;+20%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#22c55e;"></div><span style="color:#9ca3af; font-size:0.8rem;">流入 (+5~20%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#334155;"></div><span style="color:#9ca3af; font-size:0.8rem;">平穩 (-5~+5%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#ef4444;"></div><span style="color:#9ca3af; font-size:0.8rem;">流出 (-5~-20%)</span></div>
+                <div style="display:flex; align-items:center; gap:0.4rem;"><div style="width:16px; height:16px; border-radius:4px; background:#7f1d1d;"></div><span style="color:#9ca3af; font-size:0.8rem;">大幅流出 (&lt;-20%)</span></div>
+            </div>
+        </div>
+    </div>
+    
+        <div id="tab-macro" class="tab-content" style="display:none;">
+            <div class="section">
+                <h2>📈 總經指標軸與市場風格因子 (Macro & Factor Overlay)</h2>
+                <p style="color:#9ca3af;font-size:0.9rem;margin-bottom:1.5rem;">分析機構在 T 季度的行業調倉，是否成功捕捉到 T+1 季度的市場變化。</p>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:0.8rem;margin-bottom:1.5rem;"><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">S&P 500</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#f43f5e;margin-top:4px;">-7.5%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">NASDAQ</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#f43f5e;margin-top:4px;">-10.5%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">VIX</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+111.0%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">10Y Treasury</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+3.7%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">DXY (USD)</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+2.1%</div>
+            </div><div style="background:rgba(255,255,255,0.03);padding:0.8rem;border-radius:10px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
+                <div style="color:#9ca3af;font-size:0.75rem;text-transform:uppercase;">Gold</div>
+                <div style="font-size:1.2rem;font-weight:700;color:#10b981;margin-top:4px;">+4.9%</div>
+            </div></div><div style="display:flex;gap:1.5rem;align-items:center;margin-bottom:1.5rem;padding:1rem;background:rgba(255,255,255,0.03);border-radius:12px;border:1px solid rgba(255,255,255,0.06);">
+        <div style="text-align:center;">
+            <div style="font-size:2rem;font-weight:700;color:#f59e0b;">54.8%</div>
+            <div style="color:#9ca3af;font-size:0.8rem;">整體命中率</div>
+        </div>
+        <div style="color:#9ca3af;font-size:0.9rem;">
+            在 367 次顯著行業調倉決策中，有 201 次成功預判了 T+1 季度的行業走向。
+        </div>
+    </div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2025-12-31 調倉 → 2026-01-01 ~ 2026-03-31 驗證
+                <span style="color:#f43f5e;font-weight:600;margin-left:0.5rem;">命中率 40.0%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>工業與製造</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+365.4%</td>
+                <td style="color:#9ca3af;">XLI</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-0.6%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>消費者服務</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-100.0%</td>
+                <td style="color:#9ca3af;">XLC</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.4%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>金融業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-100.0%</td>
+                <td style="color:#9ca3af;">XLF</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-11.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>電子科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+30.2%</td>
+                <td style="color:#9ca3af;">SMH</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-2.9%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>零售業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-26.2%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-10.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>運輸業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+26.0%</td>
+                <td style="color:#9ca3af;">IYT</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-3.8%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>公用事業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-24.4%</td>
+                <td style="color:#9ca3af;">XLU</td>
+                <td><span style="color:#10b981;font-weight:600;">+7.1%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>耐用消費品</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-23.2%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-10.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>科技服務</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+12.1%</td>
+                <td style="color:#9ca3af;">QQQ</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-8.8%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>ETF / 大盤指數</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+8.2%</td>
+                <td style="color:#9ca3af;">SPY</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.2%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr></tbody></table></div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2025-09-30 調倉 → 2025-10-01 ~ 2025-12-31 驗證
+                <span style="color:#10b981;font-weight:600;margin-left:0.5rem;">命中率 90.0%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>耐用消費品</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+1050.2%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">0.0%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>ETF / 大盤指數</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+104.8%</td>
+                <td style="color:#9ca3af;">SPY</td>
+                <td><span style="color:#10b981;font-weight:600;">+3.1%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>金融業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">XLF</td>
+                <td><span style="color:#10b981;font-weight:600;">+3.7%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>工業與製造</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">XLI</td>
+                <td><span style="color:#10b981;font-weight:600;">+2.1%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>健康科技</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-84.7%</td>
+                <td style="color:#9ca3af;">XLV</td>
+                <td><span style="color:#10b981;font-weight:600;">+9.0%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>運輸業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+51.4%</td>
+                <td style="color:#9ca3af;">IYT</td>
+                <td><span style="color:#10b981;font-weight:600;">+5.4%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>電子科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+30.4%</td>
+                <td style="color:#9ca3af;">SMH</td>
+                <td><span style="color:#10b981;font-weight:600;">+9.2%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>零售業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+22.1%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">0.0%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>公用事業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-18.0%</td>
+                <td style="color:#9ca3af;">XLU</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-1.7%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>科技服務</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+9.5%</td>
+                <td style="color:#9ca3af;">QQQ</td>
+                <td><span style="color:#10b981;font-weight:600;">+2.8%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr></tbody></table></div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2025-06-30 調倉 → 2025-07-01 ~ 2025-09-30 驗證
+                <span style="color:#f59e0b;font-weight:600;margin-left:0.5rem;">命中率 55.6%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>健康科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+785.5%</td>
+                <td style="color:#9ca3af;">XLV</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-0.1%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>航太與國防</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+175.9%</td>
+                <td style="color:#9ca3af;">ITA</td>
+                <td><span style="color:#10b981;font-weight:600;">+11.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>耐用消費品</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">+10.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>運輸業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+84.3%</td>
+                <td style="color:#9ca3af;">IYT</td>
+                <td><span style="color:#10b981;font-weight:600;">+4.1%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>ETF / 大盤指數</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-51.8%</td>
+                <td style="color:#9ca3af;">SPY</td>
+                <td><span style="color:#10b981;font-weight:600;">+7.8%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>公用事業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+43.2%</td>
+                <td style="color:#9ca3af;">XLU</td>
+                <td><span style="color:#10b981;font-weight:600;">+7.0%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>電子科技</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+37.2%</td>
+                <td style="color:#9ca3af;">SMH</td>
+                <td><span style="color:#10b981;font-weight:600;">+17.0%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>消費者服務</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-23.4%</td>
+                <td style="color:#9ca3af;">XLC</td>
+                <td><span style="color:#10b981;font-weight:600;">+10.4%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>零售業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-17.9%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">+10.5%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr></tbody></table></div><div style="margin-bottom:1rem;">
+            <h3 style="font-size:1rem;color:#e2e8f0;margin-bottom:0.5rem;">
+                📅 2025-03-31 調倉 → 2025-04-01 ~ 2025-06-30 驗證
+                <span style="color:#f59e0b;font-weight:600;margin-left:0.5rem;">命中率 50.0%</span>
+            </h3>
+            <table style="font-size:0.85rem;">
+                <thead><tr>
+                    <th>行業板塊</th><th>調倉方向</th><th>變動幅度</th><th>基準 ETF</th><th>T+1 報酬</th><th>命中</th>
+                </tr></thead><tbody><tr>
+                <td>航太與國防</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+100%</td>
+                <td style="color:#9ca3af;">ITA</td>
+                <td><span style="color:#10b981;font-weight:600;">+21.7%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>能源礦產</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-100.0%</td>
+                <td style="color:#9ca3af;">XLE</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-8.5%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>運輸業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-60.8%</td>
+                <td style="color:#9ca3af;">IYT</td>
+                <td><span style="color:#10b981;font-weight:600;">+7.3%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>消費者服務</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-35.0%</td>
+                <td style="color:#9ca3af;">XLC</td>
+                <td><span style="color:#10b981;font-weight:600;">+11.8%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>電子科技</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-22.5%</td>
+                <td style="color:#9ca3af;">SMH</td>
+                <td><span style="color:#10b981;font-weight:600;">+31.0%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>健康科技</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-22.1%</td>
+                <td style="color:#9ca3af;">XLV</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-6.1%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>科技服務</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-16.3%</td>
+                <td style="color:#9ca3af;">QQQ</td>
+                <td><span style="color:#10b981;font-weight:600;">+16.1%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>公用事業</td>
+                <td style="color:#f43f5e;font-weight:600;">減持</td>
+                <td>-13.1%</td>
+                <td style="color:#9ca3af;">XLU</td>
+                <td><span style="color:#10b981;font-weight:600;">+3.6%</span></td>
+                <td style="text-align:center;">❌</td>
+            </tr><tr>
+                <td>零售業</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+7.8%</td>
+                <td style="color:#9ca3af;">XLY</td>
+                <td><span style="color:#10b981;font-weight:600;">+9.8%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr><tr>
+                <td>ETF / 大盤指數</td>
+                <td style="color:#10b981;font-weight:600;">增持</td>
+                <td>+7.6%</td>
+                <td style="color:#9ca3af;">SPY</td>
+                <td><span style="color:#10b981;font-weight:600;">+9.9%</span></td>
+                <td style="text-align:center;">✅</td>
+            </tr></tbody></table></div>
+            </div>
+        </div>
+        
+    </div>
+    
+    <div id="tab-compare" class="tab-content" style="display:none;">
+        <div class="section">
+            <h2>⚖️ 自訂季度倉位變動比較 (Diff Explorer)</h2>
+            <div style="margin-bottom: 1rem; display:flex; gap: 1rem; align-items:center; flex-wrap:wrap; background: rgba(255,255,255,0.03); padding: 1rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.05);">
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">比較期間：</span>
+                    <select id="comp-latest" onchange="updateCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                    </select>
+                    <span style="color:#64748b; font-size:0.9rem; font-weight:bold;">VS</span>
+                    <select id="comp-old" onchange="updateCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                    </select>
+                </div>
+                
+                <div style="width: 1px; height: 24px; background: rgba(255,255,255,0.1); margin: 0 0.5rem;"></div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">搜尋標的：</span>
+                    <input type="text" id="comp-search" onkeyup="renderCompare()" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:180px;">
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">狀態篩選：</span>
+                    <select id="comp-status" onchange="renderCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                        <option value="ALL">全部 (All)</option>
+                        <option value="NEW">建倉 (New)</option>
+                        <option value="INCREASED">增持 (Increased)</option>
+                        <option value="DECREASED">減持 (Decreased)</option>
+                        <option value="LIQUIDATED">清倉 (Liquidated)</option>
+                    </select>
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">行業篩選：</span>
+                    <select id="comp-sector" onchange="renderCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                        <option value="ALL">全部 (All)</option>
+                    </select>
+                </div>
+                
+                <div style="display:flex; align-items:center; gap:0.5rem;">
+                    <span style="color:#9ca3af; font-size:0.9rem;">資產類型：</span>
+                    <select id="comp-asset" onchange="renderCompare()" style="padding:0.4rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px;">
+                        <option value="ALL">全部 (All)</option>
+                        <option value="COMMON">股票 (Common)</option>
+                        <option value="OPTIONS">選擇權 (Options)</option>
+                        <option value="CALL">買權 (Call)</option>
+                        <option value="PUT">賣權 (Put)</option>
+                    </select>
+                </div>
+            </div>
+            <div style="overflow-x:auto;">
+                <table id="comp-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" onclick="handleSort('ticker')" data-sort="ticker">Ticker/Name</th>
+                            <th class="sortable" onclick="handleSort('sector')" data-sort="sector">行業板塊</th>
+                            <th class="sortable" onclick="handleSort('sOld')" data-sort="sOld">前期 Shares</th>
+                            <th class="sortable" onclick="handleSort('sNew')" data-sort="sNew">後期 Shares</th>
+                            <th class="sortable" onclick="handleSort('changeShares')" data-sort="changeShares">變動 Shares</th>
+                            <th class="sortable" onclick="handleSort('vNew')" data-sort="vNew">後期 Value</th>
+                            <th class="sortable" onclick="handleSort('pct')" data-sort="pct">變動比例</th>
+                            <th class="sortable" onclick="handleSort('status')" data-sort="status">狀態</th>
+                        </tr>
+                    </thead>
+                    <tbody id="comp-tbody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+        <div id="tab-0" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-0" onkeyup="filterPeriodTabs(0)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$5.93B</div>
+                    <div class="sub">Filing Date: 2026-05-15</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">31 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1656456/000165645626000002/0001656456-26-000002-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">74.3%</div>
+                    <div class="sub">HHI: 698.6</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">0.0%</div>
+                    <div class="sub">金額：$0 (0 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$0</div>
+                    <div class="sub">0 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🔵 Common Stock (31 positions, $5.93B)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-0"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-0', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">AMZN</span></td>
+                <td>4,320,000</td>
+                <td class="val">$899.7M</td>
+                <td>15.2%</td>
+                <td><span style="color:#10b981;font-weight:600;">+98.2%</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker common">MU</span></td>
+                <td>1,665,000</td>
+                <td class="val">$562.5M</td>
+                <td>9.5%</td>
+                <td><span style="color:#10b981;font-weight:600;">+11.0%</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker common">GOOG</span></td>
+                <td>1,732,700</td>
+                <td class="val">$497.0M</td>
+                <td>8.4%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-3.0%</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker common">UBER</span></td>
+                <td>6,332,720</td>
+                <td class="val">$455.5M</td>
+                <td>7.7%</td>
+                <td><span style="color:#10b981;font-weight:600;">+242.3%</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker common">0LCV.IL</span></td>
+                <td>1,327,500</td>
+                <td class="val">$448.6M</td>
+                <td>7.6%</td>
+                <td><span style="color:#10b981;font-weight:600;">+17.5%</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker common">BABA</span></td>
+                <td>3,465,000</td>
+                <td class="val">$434.7M</td>
+                <td>7.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-32.6%</span></td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker common">VST</span></td>
+                <td>2,022,332</td>
+                <td class="val">$304.0M</td>
+                <td>5.1%</td>
+                <td><span style="color:#10b981;font-weight:600;">+114.0%</span></td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker common">EWY</span></td>
+                <td>2,400,000</td>
+                <td class="val">$295.2M</td>
+                <td>5.0%</td>
+                <td><span style="color:#10b981;font-weight:600;">+28.0%</span></td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker common">NVDA</span></td>
+                <td>1,471,500</td>
+                <td class="val">$256.6M</td>
+                <td>4.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-13.4%</span></td>
+            </tr><tr>
+                <td>10</td>
+                <td><span class="ticker common">NRG</span></td>
+                <td>1,734,442</td>
+                <td class="val">$253.5M</td>
+                <td>4.3%</td>
+                <td><span style="color:#10b981;font-weight:600;">+5.8%</span></td>
+            </tr><tr>
+                <td>11</td>
+                <td><span class="ticker common">META</span></td>
+                <td>436,500</td>
+                <td class="val">$249.7M</td>
+                <td>4.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-27.3%</span></td>
+            </tr><tr>
+                <td>12</td>
+                <td><span class="ticker common">SNDK</span></td>
+                <td>281,250</td>
+                <td class="val">$178.7M</td>
+                <td>3.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>13</td>
+                <td><span class="ticker common">GLW</span></td>
+                <td>1,129,500</td>
+                <td class="val">$153.6M</td>
+                <td>2.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-28.1%</span></td>
+            </tr><tr>
+                <td>14</td>
+                <td><span class="ticker common">WHR</span></td>
+                <td>1,950,000</td>
+                <td class="val">$105.1M</td>
+                <td>1.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-50.1%</span></td>
+            </tr><tr>
+                <td>15</td>
+                <td><span class="ticker common">PDD HOLDINGS INC</span></td>
+                <td>900,000</td>
+                <td class="val">$92.0M</td>
+                <td>1.5%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-49.3%</span></td>
+            </tr><tr>
+                <td>16</td>
+                <td><span class="ticker common">LRCX</span></td>
+                <td>382,500</td>
+                <td class="val">$81.7M</td>
+                <td>1.4%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-10.0%</span></td>
+            </tr><tr>
+                <td>17</td>
+                <td><span class="ticker common">BAIDU INC</span></td>
+                <td>692,100</td>
+                <td class="val">$77.1M</td>
+                <td>1.3%</td>
+                <td><span style="color:#10b981;font-weight:600;">+20.4%</span></td>
+            </tr><tr>
+                <td>18</td>
+                <td><span class="ticker common">LHX</span></td>
+                <td>198,000</td>
+                <td class="val">$68.3M</td>
+                <td>1.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-32.9%</span></td>
+            </tr><tr>
+                <td>19</td>
+                <td><span class="ticker common">RTX</span></td>
+                <td>342,000</td>
+                <td class="val">$66.0M</td>
+                <td>1.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-31.6%</span></td>
+            </tr><tr>
+                <td>20</td>
+                <td><span class="ticker common">ASML</span></td>
+                <td>49,500</td>
+                <td class="val">$65.4M</td>
+                <td>1.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-20.8%</span></td>
+            </tr><tr>
+                <td>21</td>
+                <td><span class="ticker common">QCOM</span></td>
+                <td>498,613</td>
+                <td class="val">$64.2M</td>
+                <td>1.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-56.5%</span></td>
+            </tr><tr>
+                <td>22</td>
+                <td><span class="ticker common">BALL</span></td>
+                <td>837,000</td>
+                <td class="val">$49.5M</td>
+                <td>0.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-30.2%</span></td>
+            </tr><tr>
+                <td>23</td>
+                <td><span class="ticker common">AMD</span></td>
+                <td>221,400</td>
+                <td class="val">$45.0M</td>
+                <td>0.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-31.9%</span></td>
+            </tr><tr>
+                <td>24</td>
+                <td><span class="ticker common">JD</span></td>
+                <td>1,305,000</td>
+                <td class="val">$38.6M</td>
+                <td>0.7%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-68.6%</span></td>
+            </tr><tr>
+                <td>25</td>
+                <td><span class="ticker common">LYFT</span></td>
+                <td>2,700,000</td>
+                <td class="val">$35.9M</td>
+                <td>0.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-28.9%</span></td>
+            </tr><tr>
+                <td>26</td>
+                <td><span class="ticker common">MSFT</span></td>
+                <td>90,000</td>
+                <td class="val">$33.3M</td>
+                <td>0.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-82.0%</span></td>
+            </tr><tr>
+                <td>27</td>
+                <td><span class="ticker common">KWEB</span></td>
+                <td>1,080,000</td>
+                <td class="val">$30.7M</td>
+                <td>0.5%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-77.3%</span></td>
+            </tr><tr>
+                <td>28</td>
+                <td><span class="ticker common">ET</span></td>
+                <td>1,576,125</td>
+                <td class="val">$30.4M</td>
+                <td>0.5%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-28.1%</span></td>
+            </tr><tr>
+                <td>29</td>
+                <td><span class="ticker common">MPLX</span></td>
+                <td>502,460</td>
+                <td class="val">$28.7M</td>
+                <td>0.5%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-19.9%</span></td>
+            </tr><tr>
+                <td>30</td>
+                <td><span class="ticker common">UNH</span></td>
+                <td>90,000</td>
+                <td class="val">$24.4M</td>
+                <td>0.4%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-55.0%</span></td>
+            </tr><tr>
+                <td>31</td>
+                <td><span class="ticker common">DBK.DE</span></td>
+                <td>257,616</td>
+                <td class="val">$7.7M</td>
+                <td>0.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-91.8%</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+        <div id="tab-1" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-1" onkeyup="filterPeriodTabs(1)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$6.93B</div>
+                    <div class="sub">Filing Date: 2026-02-17</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">39 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1656456/000165645626000001/0001656456-26-000001-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">59.0%</div>
+                    <div class="sub">HHI: 471.9</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">0.0%</div>
+                    <div class="sub">金額：$0 (0 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$71.4M</div>
+                    <div class="sub">1 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🟢 Call Options (1 positions, $71.4M)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-calls-1"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-calls-1', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker call">MU</span></td>
+                <td>250,000</td>
+                <td class="val">$71.4M</td>
+                <td>1.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div>
+            <div class="section">
+                <h2>🔵 Common Stock (38 positions, $6.85B)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-1"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-1', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">BABA</span></td>
+                <td>5,137,931</td>
+                <td class="val">$753.1M</td>
+                <td>10.9%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-20.3%</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker common">GOOG</span></td>
+                <td>1,786,931</td>
+                <td class="val">$560.7M</td>
+                <td>8.1%</td>
+                <td><span style="color:#10b981;font-weight:600;">+28.8%</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker common">AMZN</span></td>
+                <td>2,179,391</td>
+                <td class="val">$503.0M</td>
+                <td>7.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-12.8%</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker common">MU</span></td>
+                <td>1,500,000</td>
+                <td class="val">$428.1M</td>
+                <td>6.2%</td>
+                <td><span style="color:#10b981;font-weight:600;">+200.0%</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker common">META</span></td>
+                <td>600,000</td>
+                <td class="val">$396.1M</td>
+                <td>5.7%</td>
+                <td><span style="color:#10b981;font-weight:600;">+62.2%</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker common">0LCV.IL</span></td>
+                <td>1,130,000</td>
+                <td class="val">$343.4M</td>
+                <td>5.0%</td>
+                <td><span style="color:#10b981;font-weight:600;">+6.6%</span></td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker common">NVDA</span></td>
+                <td>1,700,000</td>
+                <td class="val">$317.1M</td>
+                <td>4.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-10.5%</span></td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker common">WHR</span></td>
+                <td>3,910,000</td>
+                <td class="val">$282.1M</td>
+                <td>4.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-28.9%</span></td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker common">NRG</span></td>
+                <td>1,640,000</td>
+                <td class="val">$261.2M</td>
+                <td>3.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-12.3%</span></td>
+            </tr><tr>
+                <td>10</td>
+                <td><span class="ticker common">MSFT</span></td>
+                <td>500,000</td>
+                <td class="val">$241.8M</td>
+                <td>3.5%</td>
+                <td><span style="color:#10b981;font-weight:600;">+8.1%</span></td>
+            </tr><tr>
+                <td>11</td>
+                <td><span class="ticker common">AAL</span></td>
+                <td>14,150,000</td>
+                <td class="val">$216.9M</td>
+                <td>3.1%</td>
+                <td><span style="color:#10b981;font-weight:600;">+53.0%</span></td>
+            </tr><tr>
+                <td>12</td>
+                <td><span class="ticker common">PDD HOLDINGS INC</span></td>
+                <td>1,775,000</td>
+                <td class="val">$201.3M</td>
+                <td>2.9%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-1.4%</span></td>
+            </tr><tr>
+                <td>13</td>
+                <td><span class="ticker common">QCOM</span></td>
+                <td>1,145,000</td>
+                <td class="val">$195.9M</td>
+                <td>2.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-8.0%</span></td>
+            </tr><tr>
+                <td>14</td>
+                <td><span class="ticker common">EWY</span></td>
+                <td>1,875,000</td>
+                <td class="val">$182.3M</td>
+                <td>2.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>15</td>
+                <td><span class="ticker common">KWEB</span></td>
+                <td>4,750,000</td>
+                <td class="val">$161.7M</td>
+                <td>2.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-35.8%</span></td>
+            </tr><tr>
+                <td>16</td>
+                <td><span class="ticker common">VST</span></td>
+                <td>945,000</td>
+                <td class="val">$152.5M</td>
+                <td>2.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-24.1%</span></td>
+            </tr><tr>
+                <td>17</td>
+                <td><span class="ticker common">UBER</span></td>
+                <td>1,850,000</td>
+                <td class="val">$151.2M</td>
+                <td>2.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-23.1%</span></td>
+            </tr><tr>
+                <td>18</td>
+                <td><span class="ticker common">GLW</span></td>
+                <td>1,570,200</td>
+                <td class="val">$137.5M</td>
+                <td>2.0%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-3.4%</span></td>
+            </tr><tr>
+                <td>19</td>
+                <td><span class="ticker common">DBK.DE</span></td>
+                <td>3,150,000</td>
+                <td class="val">$121.5M</td>
+                <td>1.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-16.9%</span></td>
+            </tr><tr>
+                <td>20</td>
+                <td><span class="ticker common">JD</span></td>
+                <td>4,157,046</td>
+                <td class="val">$119.3M</td>
+                <td>1.7%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-33.2%</span></td>
+            </tr><tr>
+                <td>21</td>
+                <td><span class="ticker common">OC</span></td>
+                <td>950,000</td>
+                <td class="val">$106.3M</td>
+                <td>1.5%</td>
+                <td><span style="color:#10b981;font-weight:600;">+488.2%</span></td>
+            </tr><tr>
+                <td>22</td>
+                <td><span class="ticker common">RTX</span></td>
+                <td>500,000</td>
+                <td class="val">$91.7M</td>
+                <td>1.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-1.9%</span></td>
+            </tr><tr>
+                <td>23</td>
+                <td><span class="ticker common">LHX</span></td>
+                <td>295,000</td>
+                <td class="val">$86.6M</td>
+                <td>1.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-1.7%</span></td>
+            </tr><tr>
+                <td>24</td>
+                <td><span class="ticker common">BAIDU INC</span></td>
+                <td>575,000</td>
+                <td class="val">$75.1M</td>
+                <td>1.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-45.0%</span></td>
+            </tr><tr>
+                <td>25</td>
+                <td><span class="ticker common">MHK</span></td>
+                <td>675,000</td>
+                <td class="val">$73.8M</td>
+                <td>1.1%</td>
+                <td><span style="color:#10b981;font-weight:600;">+318.0%</span></td>
+            </tr><tr>
+                <td>26</td>
+                <td><span class="ticker common">LYFT</span></td>
+                <td>3,800,000</td>
+                <td class="val">$73.6M</td>
+                <td>1.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-32.1%</span></td>
+            </tr><tr>
+                <td>27</td>
+                <td><span class="ticker common">LRCX</span></td>
+                <td>425,000</td>
+                <td class="val">$72.8M</td>
+                <td>1.1%</td>
+                <td><span style="color:#10b981;font-weight:600;">+14.9%</span></td>
+            </tr><tr>
+                <td>28</td>
+                <td><span class="ticker common">AMD</span></td>
+                <td>325,000</td>
+                <td class="val">$69.6M</td>
+                <td>1.0%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-65.8%</span></td>
+            </tr><tr>
+                <td>29</td>
+                <td><span class="ticker common">ASML</span></td>
+                <td>62,500</td>
+                <td class="val">$66.9M</td>
+                <td>1.0%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-2.3%</span></td>
+            </tr><tr>
+                <td>30</td>
+                <td><span class="ticker common">UNH</span></td>
+                <td>200,000</td>
+                <td class="val">$66.0M</td>
+                <td>1.0%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-1.7%</span></td>
+            </tr><tr>
+                <td>31</td>
+                <td><span class="ticker common">BALL</span></td>
+                <td>1,200,000</td>
+                <td class="val">$63.6M</td>
+                <td>0.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>32</td>
+                <td><span class="ticker common">IQV</span></td>
+                <td>280,000</td>
+                <td class="val">$63.1M</td>
+                <td>0.9%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-1.8%</span></td>
+            </tr><tr>
+                <td>33</td>
+                <td><span class="ticker common">UAL</span></td>
+                <td>465,000</td>
+                <td class="val">$52.0M</td>
+                <td>0.8%</td>
+                <td><span style="color:#10b981;font-weight:600;">+0.5%</span></td>
+            </tr><tr>
+                <td>34</td>
+                <td><span class="ticker common">FXI</span></td>
+                <td>1,087,500</td>
+                <td class="val">$41.6M</td>
+                <td>0.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-2.0%</span></td>
+            </tr><tr>
+                <td>35</td>
+                <td><span class="ticker common">ET</span></td>
+                <td>2,191,250</td>
+                <td class="val">$36.1M</td>
+                <td>0.5%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-55.8%</span></td>
+            </tr><tr>
+                <td>36</td>
+                <td><span class="ticker common">MPLX</span></td>
+                <td>627,500</td>
+                <td class="val">$33.5M</td>
+                <td>0.5%</td>
+                <td><span style="color:#10b981;font-weight:600;">+17.3%</span></td>
+            </tr><tr>
+                <td>37</td>
+                <td><span class="ticker common">DAL</span></td>
+                <td>475,000</td>
+                <td class="val">$33.0M</td>
+                <td>0.5%</td>
+                <td><span style="color:#10b981;font-weight:600;">+2.7%</span></td>
+            </tr><tr>
+                <td>38</td>
+                <td><span class="ticker common">GT</span></td>
+                <td>2,500,000</td>
+                <td class="val">$21.9M</td>
+                <td>0.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-51.4%</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+        <div id="tab-2" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-2" onkeyup="filterPeriodTabs(2)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$7.38B</div>
+                    <div class="sub">Filing Date: 2025-11-13</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">45 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1656456/000165645625000007/0001656456-25-000007-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">57.6%</div>
+                    <div class="sub">HHI: 533.6</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">0.0%</div>
+                    <div class="sub">金額：$0 (0 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$0</div>
+                    <div class="sub">0 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🔵 Common Stock (45 positions, $7.38B)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-2"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-2', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">BABA</span></td>
+                <td>6,450,000</td>
+                <td class="val">$1.15B</td>
+                <td>15.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-8.7%</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker common">AMZN</span></td>
+                <td>2,500,000</td>
+                <td class="val">$548.9M</td>
+                <td>7.4%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.4%</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker common">WHR</span></td>
+                <td>5,500,000</td>
+                <td class="val">$432.3M</td>
+                <td>5.9%</td>
+                <td><span style="color:#10b981;font-weight:600;">&gt;999%</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker common">NVDA</span></td>
+                <td>1,900,000</td>
+                <td class="val">$354.5M</td>
+                <td>4.8%</td>
+                <td><span style="color:#10b981;font-weight:600;">+8.6%</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker common">GOOG</span></td>
+                <td>1,387,500</td>
+                <td class="val">$337.9M</td>
+                <td>4.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.5%</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker common">KWEB</span></td>
+                <td>7,400,000</td>
+                <td class="val">$310.9M</td>
+                <td>4.2%</td>
+                <td><span style="color:#10b981;font-weight:600;">+85.0%</span></td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker common">NRG</span></td>
+                <td>1,870,000</td>
+                <td class="val">$302.8M</td>
+                <td>4.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-5.6%</span></td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker common">0LCV.IL</span></td>
+                <td>1,060,000</td>
+                <td class="val">$296.0M</td>
+                <td>4.0%</td>
+                <td><span style="color:#10b981;font-weight:600;">+3.4%</span></td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker common">META</span></td>
+                <td>370,000</td>
+                <td class="val">$271.7M</td>
+                <td>3.7%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.5%</span></td>
+            </tr><tr>
+                <td>10</td>
+                <td><span class="ticker common">VST</span></td>
+                <td>1,245,000</td>
+                <td class="val">$243.9M</td>
+                <td>3.3%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-30.8%</span></td>
+            </tr><tr>
+                <td>11</td>
+                <td><span class="ticker common">MSFT</span></td>
+                <td>462,500</td>
+                <td class="val">$239.6M</td>
+                <td>3.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.5%</span></td>
+            </tr><tr>
+                <td>12</td>
+                <td><span class="ticker common">PDD HOLDINGS INC</span></td>
+                <td>1,800,000</td>
+                <td class="val">$237.9M</td>
+                <td>3.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-10.0%</span></td>
+            </tr><tr>
+                <td>13</td>
+                <td><span class="ticker common">UBER</span></td>
+                <td>2,406,983</td>
+                <td class="val">$235.8M</td>
+                <td>3.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-12.5%</span></td>
+            </tr><tr>
+                <td>14</td>
+                <td><span class="ticker common">JD</span></td>
+                <td>6,225,000</td>
+                <td class="val">$217.8M</td>
+                <td>2.9%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-11.1%</span></td>
+            </tr><tr>
+                <td>15</td>
+                <td><span class="ticker common">QCOM</span></td>
+                <td>1,245,000</td>
+                <td class="val">$207.1M</td>
+                <td>2.8%</td>
+                <td><span style="color:#10b981;font-weight:600;">+255.7%</span></td>
+            </tr><tr>
+                <td>16</td>
+                <td><span class="ticker common">AMD</span></td>
+                <td>950,000</td>
+                <td class="val">$153.7M</td>
+                <td>2.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>17</td>
+                <td><span class="ticker common">BAIDU INC</span></td>
+                <td>1,045,000</td>
+                <td class="val">$137.7M</td>
+                <td>1.9%</td>
+                <td><span style="color:#10b981;font-weight:600;">+67.2%</span></td>
+            </tr><tr>
+                <td>18</td>
+                <td><span class="ticker common">DBK.DE</span></td>
+                <td>3,790,000</td>
+                <td class="val">$134.2M</td>
+                <td>1.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-5.2%</span></td>
+            </tr><tr>
+                <td>19</td>
+                <td><span class="ticker common">GLW</span></td>
+                <td>1,625,000</td>
+                <td class="val">$133.3M</td>
+                <td>1.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.1%</span></td>
+            </tr><tr>
+                <td>20</td>
+                <td><span class="ticker common">LYFT</span></td>
+                <td>5,600,000</td>
+                <td class="val">$123.3M</td>
+                <td>1.7%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-30.0%</span></td>
+            </tr><tr>
+                <td>21</td>
+                <td><span class="ticker common">FISV</span></td>
+                <td>925,000</td>
+                <td class="val">$119.3M</td>
+                <td>1.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>22</td>
+                <td><span class="ticker common">AAL</span></td>
+                <td>9,250,000</td>
+                <td class="val">$104.0M</td>
+                <td>1.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>23</td>
+                <td><span class="ticker common">LHX</span></td>
+                <td>300,000</td>
+                <td class="val">$91.6M</td>
+                <td>1.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-14.3%</span></td>
+            </tr><tr>
+                <td>24</td>
+                <td><span class="ticker common">RTX</span></td>
+                <td>509,500</td>
+                <td class="val">$85.3M</td>
+                <td>1.2%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-12.9%</span></td>
+            </tr><tr>
+                <td>25</td>
+                <td><span class="ticker common">ET</span></td>
+                <td>4,957,235</td>
+                <td class="val">$85.1M</td>
+                <td>1.2%</td>
+                <td><span style="color:#9ca3af;">0.0%</span></td>
+            </tr><tr>
+                <td>26</td>
+                <td><span class="ticker common">MU</span></td>
+                <td>500,000</td>
+                <td class="val">$83.7M</td>
+                <td>1.1%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-39.4%</span></td>
+            </tr><tr>
+                <td>27</td>
+                <td><span class="ticker common">UNH</span></td>
+                <td>203,500</td>
+                <td class="val">$70.3M</td>
+                <td>1.0%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-91.7%</span></td>
+            </tr><tr>
+                <td>28</td>
+                <td><span class="ticker common">TFC</span></td>
+                <td>1,387,500</td>
+                <td class="val">$63.4M</td>
+                <td>0.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>29</td>
+                <td><span class="ticker common">ASML</span></td>
+                <td>64,000</td>
+                <td class="val">$62.0M</td>
+                <td>0.8%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-8.6%</span></td>
+            </tr><tr>
+                <td>30</td>
+                <td><span class="ticker common">CZR</span></td>
+                <td>2,100,000</td>
+                <td class="val">$56.8M</td>
+                <td>0.8%</td>
+                <td><span style="color:#9ca3af;">0.0%</span></td>
+            </tr><tr>
+                <td>31</td>
+                <td><span class="ticker common">IQV</span></td>
+                <td>285,000</td>
+                <td class="val">$54.1M</td>
+                <td>0.7%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-5.0%</span></td>
+            </tr><tr>
+                <td>32</td>
+                <td><span class="ticker common">LRCX</span></td>
+                <td>370,000</td>
+                <td class="val">$49.5M</td>
+                <td>0.7%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.5%</span></td>
+            </tr><tr>
+                <td>33</td>
+                <td><span class="ticker common">FXI</span></td>
+                <td>1,110,000</td>
+                <td class="val">$45.7M</td>
+                <td>0.6%</td>
+                <td><span style="color:#10b981;font-weight:600;">+11.0%</span></td>
+            </tr><tr>
+                <td>34</td>
+                <td><span class="ticker common">UAL</span></td>
+                <td>462,500</td>
+                <td class="val">$44.6M</td>
+                <td>0.6%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-15.9%</span></td>
+            </tr><tr>
+                <td>35</td>
+                <td><span class="ticker common">GT</span></td>
+                <td>5,140,000</td>
+                <td class="val">$38.4M</td>
+                <td>0.5%</td>
+                <td><span style="color:#10b981;font-weight:600;">+496.4%</span></td>
+            </tr><tr>
+                <td>36</td>
+                <td><span class="ticker common">KEY</span></td>
+                <td>2,020,000</td>
+                <td class="val">$37.8M</td>
+                <td>0.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>37</td>
+                <td><span class="ticker common">CFG</span></td>
+                <td>600,000</td>
+                <td class="val">$31.9M</td>
+                <td>0.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>38</td>
+                <td><span class="ticker common">COMERICA INC</span></td>
+                <td>462,500</td>
+                <td class="val">$31.7M</td>
+                <td>0.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>39</td>
+                <td><span class="ticker common">XYZ</span></td>
+                <td>370,000</td>
+                <td class="val">$26.7M</td>
+                <td>0.4%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-42.3%</span></td>
+            </tr><tr>
+                <td>40</td>
+                <td><span class="ticker common">MPLX</span></td>
+                <td>535,000</td>
+                <td class="val">$26.7M</td>
+                <td>0.4%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-7.5%</span></td>
+            </tr><tr>
+                <td>41</td>
+                <td><span class="ticker common">DAL</span></td>
+                <td>462,500</td>
+                <td class="val">$26.2M</td>
+                <td>0.4%</td>
+                <td><span style="color:#f43f5e;font-weight:600;">-15.9%</span></td>
+            </tr><tr>
+                <td>42</td>
+                <td><span class="ticker common">OC</span></td>
+                <td>161,500</td>
+                <td class="val">$22.8M</td>
+                <td>0.3%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>43</td>
+                <td><span class="ticker common">MHK</span></td>
+                <td>161,500</td>
+                <td class="val">$20.8M</td>
+                <td>0.3%</td>
+                <td><span style="color:#10b981;font-weight:600;">+148.5%</span></td>
+            </tr><tr>
+                <td>44</td>
+                <td><span class="ticker common">WAL</span></td>
+                <td>195,000</td>
+                <td class="val">$16.9M</td>
+                <td>0.2%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>45</td>
+                <td><span class="ticker common">ZION</span></td>
+                <td>285,000</td>
+                <td class="val">$16.1M</td>
+                <td>0.2%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+        <div id="tab-3" class="tab-content" style="display:none;">
+            <div style="margin-bottom:1.5rem; display:flex; align-items:center; gap:0.5rem; background:rgba(255,255,255,0.03); padding:1rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05);">
+                <span style="color:#9ca3af; font-size:0.9rem;">🔍 搜尋標的：</span>
+                <input type="text" id="search-period-3" onkeyup="filterPeriodTabs(3)" placeholder="輸入 Ticker 或名稱..." style="padding:0.4rem 0.8rem; background:#1e293b; color:#fff; border:1px solid #334155; border-radius:6px; min-width:250px;">
+            </div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="label">申報管理資產規模 (AUM)</div>
+                    <div class="value">$6.45B</div>
+                    <div class="sub">Filing Date: 2025-08-14</div>
+                </div>
+                <div class="metric">
+                    <div class="label">持倉檔數</div>
+                    <div class="value">38 檔</div>
+                    <div class="sub"><a href="https://www.sec.gov/Archives/edgar/data/1656456/000165645625000006/0001656456-25-000006-index.html" target="_blank">SEC EDGAR Filing</a></div>
+                </div>
+                <div class="metric">
+                    <div class="label">Top 10 持倉佔比</div>
+                    <div class="value">64.6%</div>
+                    <div class="sub">HHI: 591.6</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看跌期權 (Puts) 佔比</div>
+                    <div class="value" style="color:#f43f5e">0.0%</div>
+                    <div class="sub">金額：$0 (0 檔)</div>
+                </div>
+                <div class="metric">
+                    <div class="label">看漲期權 (Calls)</div>
+                    <div class="value" style="color:#10b981">$0</div>
+                    <div class="sub">0 檔</div>
+                </div>
+            </div>
+        
+            <div class="section">
+                <h2>🔵 Common Stock (38 positions, $6.45B)</h2>
+                <div class="table-wrapper">
+                    <table id="tbl-commons-3"><thead><tr>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 0, true, false)" data-dir="asc">#</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 1, false, false)" data-dir="asc">Ticker</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 2, true, false)" data-dir="asc">Shares</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 3, false, true)" data-dir="asc">Value</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 4, true, false)" data-dir="asc">Weight</th>
+                        <th class="sortable" onclick="sortTable(this, 'tbl-commons-3', 5, true, false)" data-dir="asc">Shares Δ%</th>
+                    </tr></thead>
+                    <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker common">BABA</span></td>
+                <td>7,067,271</td>
+                <td class="val">$801.5M</td>
+                <td>12.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker common">UNH</span></td>
+                <td>2,450,000</td>
+                <td class="val">$764.3M</td>
+                <td>11.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker common">AMZN</span></td>
+                <td>2,700,000</td>
+                <td class="val">$592.4M</td>
+                <td>9.2%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker common">VST</span></td>
+                <td>1,800,000</td>
+                <td class="val">$348.9M</td>
+                <td>5.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker common">NRG</span></td>
+                <td>1,980,000</td>
+                <td class="val">$317.9M</td>
+                <td>4.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker common">META</span></td>
+                <td>400,000</td>
+                <td class="val">$295.2M</td>
+                <td>4.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker common">NVDA</span></td>
+                <td>1,750,000</td>
+                <td class="val">$276.5M</td>
+                <td>4.3%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker common">GOOG</span></td>
+                <td>1,500,000</td>
+                <td class="val">$266.1M</td>
+                <td>4.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker common">UBER</span></td>
+                <td>2,750,000</td>
+                <td class="val">$256.6M</td>
+                <td>4.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>10</td>
+                <td><span class="ticker common">MSFT</span></td>
+                <td>500,000</td>
+                <td class="val">$248.7M</td>
+                <td>3.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>11</td>
+                <td><span class="ticker common">0LCV.IL</span></td>
+                <td>1,025,000</td>
+                <td class="val">$232.2M</td>
+                <td>3.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>12</td>
+                <td><span class="ticker common">JD</span></td>
+                <td>7,000,000</td>
+                <td class="val">$228.5M</td>
+                <td>3.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>13</td>
+                <td><span class="ticker common">PDD HOLDINGS INC</span></td>
+                <td>2,000,000</td>
+                <td class="val">$209.3M</td>
+                <td>3.2%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>14</td>
+                <td><span class="ticker common">INTC</span></td>
+                <td>8,000,000</td>
+                <td class="val">$179.2M</td>
+                <td>2.8%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>15</td>
+                <td><span class="ticker common">KWEB</span></td>
+                <td>4,000,000</td>
+                <td class="val">$137.3M</td>
+                <td>2.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>16</td>
+                <td><span class="ticker common">LYFT</span></td>
+                <td>8,000,000</td>
+                <td class="val">$126.1M</td>
+                <td>2.0%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>17</td>
+                <td><span class="ticker common">DBK.DE</span></td>
+                <td>4,000,000</td>
+                <td class="val">$117.1M</td>
+                <td>1.8%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>18</td>
+                <td><span class="ticker common">MU</span></td>
+                <td>825,000</td>
+                <td class="val">$101.7M</td>
+                <td>1.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>19</td>
+                <td><span class="ticker common">GLW</span></td>
+                <td>1,750,000</td>
+                <td class="val">$92.0M</td>
+                <td>1.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>20</td>
+                <td><span class="ticker common">ET</span></td>
+                <td>4,957,235</td>
+                <td class="val">$89.9M</td>
+                <td>1.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>21</td>
+                <td><span class="ticker common">LHX</span></td>
+                <td>350,000</td>
+                <td class="val">$87.8M</td>
+                <td>1.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>22</td>
+                <td><span class="ticker common">RTX</span></td>
+                <td>585,000</td>
+                <td class="val">$85.4M</td>
+                <td>1.3%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>23</td>
+                <td><span class="ticker common">CZR</span></td>
+                <td>2,100,000</td>
+                <td class="val">$59.6M</td>
+                <td>0.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>24</td>
+                <td><span class="ticker common">ASML</span></td>
+                <td>70,000</td>
+                <td class="val">$56.1M</td>
+                <td>0.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>25</td>
+                <td><span class="ticker common">QCOM</span></td>
+                <td>350,000</td>
+                <td class="val">$55.7M</td>
+                <td>0.9%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>26</td>
+                <td><span class="ticker common">BAIDU INC</span></td>
+                <td>625,000</td>
+                <td class="val">$53.6M</td>
+                <td>0.8%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>27</td>
+                <td><span class="ticker common">IQV</span></td>
+                <td>300,000</td>
+                <td class="val">$47.3M</td>
+                <td>0.7%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>28</td>
+                <td><span class="ticker common">UAL</span></td>
+                <td>550,000</td>
+                <td class="val">$43.8M</td>
+                <td>0.7%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>29</td>
+                <td><span class="ticker common">XYZ</span></td>
+                <td>641,800</td>
+                <td class="val">$43.6M</td>
+                <td>0.7%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>30</td>
+                <td><span class="ticker common">LRCX</span></td>
+                <td>400,000</td>
+                <td class="val">$38.9M</td>
+                <td>0.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>31</td>
+                <td><span class="ticker common">FXI</span></td>
+                <td>1,000,000</td>
+                <td class="val">$36.8M</td>
+                <td>0.6%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>32</td>
+                <td><span class="ticker common">ORCL</span></td>
+                <td>150,000</td>
+                <td class="val">$32.8M</td>
+                <td>0.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>33</td>
+                <td><span class="ticker common">MPLX</span></td>
+                <td>578,500</td>
+                <td class="val">$29.8M</td>
+                <td>0.5%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>34</td>
+                <td><span class="ticker common">DAL</span></td>
+                <td>550,000</td>
+                <td class="val">$27.0M</td>
+                <td>0.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>35</td>
+                <td><span class="ticker common">WHR</span></td>
+                <td>266,092</td>
+                <td class="val">$27.0M</td>
+                <td>0.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>36</td>
+                <td><span class="ticker common">BEKE</span></td>
+                <td>1,500,000</td>
+                <td class="val">$26.6M</td>
+                <td>0.4%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>37</td>
+                <td><span class="ticker common">GT</span></td>
+                <td>861,782</td>
+                <td class="val">$8.9M</td>
+                <td>0.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr><tr>
+                <td>38</td>
+                <td><span class="ticker common">MHK</span></td>
+                <td>65,000</td>
+                <td class="val">$6.8M</td>
+                <td>0.1%</td>
+                <td><span style="color:#6b7280;">—</span></td>
+            </tr></tbody></table>
+                </div>
+            </div></div>
+
+    <div class="footer">
+        Generated by Whale Tracker ｜ Data Source: SEC EDGAR 13F-HR
+    </div>
+</div>
+
+<script>
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tab-link");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+// Initialize Compare Tab
+const rawPeriods = [{"date": "2026-03-31", "holdings": {"AMZN": {"shares": 4320000, "val": 899726400.0, "sector": "\u96f6\u552e\u696d"}, "MU": {"shares": 1665000, "val": 562503600.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "GOOG": {"shares": 1732700, "val": 497042322.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "UBER": {"shares": 6332720, "val": 455512550.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "0LCV.IL": {"shares": 1327500, "val": 448628625.0, "sector": "\u5176\u4ed6 / \u672a\u5206\u985e"}, "BABA": {"shares": 3465000, "val": 434718900.0, "sector": "\u96f6\u552e\u696d"}, "VST": {"shares": 2022332, "val": 304017170.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "EWY": {"shares": 2400000, "val": 295224000.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "NVDA": {"shares": 1471500, "val": 256629600.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "NRG": {"shares": 1734442, "val": 253471354.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "META": {"shares": 436500, "val": 249734745.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "SNDK": {"shares": 281250, "val": 178689375.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "GLW": {"shares": 1129500, "val": 153578115.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "WHR": {"shares": 1950000, "val": 105144000.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "PDD HOLDINGS INC": {"shares": 900000, "val": 91962000.0, "sector": "\u96f6\u552e\u696d"}, "LRCX": {"shares": 382500, "val": 81724950.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "BAIDU INC": {"shares": 692100, "val": 77113782.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "LHX": {"shares": 198000, "val": 68339700.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "RTX": {"shares": 342000, "val": 65971800.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "ASML": {"shares": 49500, "val": 65381085.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "QCOM": {"shares": 498613, "val": 64211382.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "BALL": {"shares": 837000, "val": 49475070.0, "sector": "\u5de5\u696d\u8207\u88fd\u9020"}, "AMD": {"shares": 221400, "val": 45039402.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "JD": {"shares": 1305000, "val": 38588850.0, "sector": "\u96f6\u552e\u696d"}, "LYFT": {"shares": 2700000, "val": 35910000.0, "sector": "\u904b\u8f38\u696d"}, "MSFT": {"shares": 90000, "val": 33315300.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "KWEB": {"shares": 1080000, "val": 30704400.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "ET": {"shares": 1576125, "val": 30419213.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "MPLX": {"shares": 502460, "val": 28675392.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "UNH": {"shares": 90000, "val": 24353100.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "DBK.DE": {"shares": 257616, "val": 7671804.0, "sector": "\u91d1\u878d\u696d"}}}, {"date": "2025-12-31", "holdings": {"MU (CALL)": {"shares": 250000, "val": 71352500.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "BABA": {"shares": 5137931, "val": 753117926.0, "sector": "\u96f6\u552e\u696d"}, "GOOG": {"shares": 1786931, "val": 560738948.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "AMZN": {"shares": 2179391, "val": 503047031.0, "sector": "\u96f6\u552e\u696d"}, "MU": {"shares": 1500000, "val": 428115000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "META": {"shares": 600000, "val": 396054000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "0LCV.IL": {"shares": 1130000, "val": 343395700.0, "sector": "\u5176\u4ed6 / \u672a\u5206\u985e"}, "NVDA": {"shares": 1700000, "val": 317050000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "WHR": {"shares": 3910000, "val": 282067400.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "NRG": {"shares": 1640000, "val": 261153600.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "MSFT": {"shares": 500000, "val": 241810000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "AAL": {"shares": 14150000, "val": 216919500.0, "sector": "\u904b\u8f38\u696d"}, "PDD HOLDINGS INC": {"shares": 1775000, "val": 201267250.0, "sector": "\u96f6\u552e\u696d"}, "QCOM": {"shares": 1145000, "val": 195852250.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "EWY": {"shares": 1875000, "val": 182287500.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "KWEB": {"shares": 4750000, "val": 161737500.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "VST": {"shares": 945000, "val": 152456850.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "UBER": {"shares": 1850000, "val": 151163500.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "GLW": {"shares": 1570200, "val": 137486712.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "DBK.DE": {"shares": 3150000, "val": 121464000.0, "sector": "\u91d1\u878d\u696d"}, "JD": {"shares": 4157046, "val": 119307220.0, "sector": "\u96f6\u552e\u696d"}, "OC": {"shares": 950000, "val": 106314500.0, "sector": "\u5de5\u696d\u8207\u88fd\u9020"}, "RTX": {"shares": 500000, "val": 91700000.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "LHX": {"shares": 295000, "val": 86603150.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "BAIDU INC": {"shares": 575000, "val": 75129500.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "MHK": {"shares": 675000, "val": 73777500.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "LYFT": {"shares": 3800000, "val": 73606000.0, "sector": "\u904b\u8f38\u696d"}, "LRCX": {"shares": 425000, "val": 72751500.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "AMD": {"shares": 325000, "val": 69602000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "ASML": {"shares": 62500, "val": 66866250.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "UNH": {"shares": 200000, "val": 66022000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "BALL": {"shares": 1200000, "val": 63564000.0, "sector": "\u5de5\u696d\u8207\u88fd\u9020"}, "IQV": {"shares": 280000, "val": 63114800.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "UAL": {"shares": 465000, "val": 51996300.0, "sector": "\u904b\u8f38\u696d"}, "FXI": {"shares": 1087500, "val": 41640375.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "ET": {"shares": 2191250, "val": 36133713.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "MPLX": {"shares": 627500, "val": 33489675.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "DAL": {"shares": 475000, "val": 32965000.0, "sector": "\u904b\u8f38\u696d"}, "GT": {"shares": 2500000, "val": 21900000.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}}}, {"date": "2025-09-30", "holdings": {"BABA": {"shares": 6450000, "val": 1152808500.0, "sector": "\u96f6\u552e\u696d"}, "AMZN": {"shares": 2500000, "val": 548925000.0, "sector": "\u96f6\u552e\u696d"}, "WHR": {"shares": 5500000, "val": 432300000.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "NVDA": {"shares": 1900000, "val": 354502000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "GOOG": {"shares": 1387500, "val": 337925625.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "KWEB": {"shares": 7400000, "val": 310874000.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "NRG": {"shares": 1870000, "val": 302846500.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "0LCV.IL": {"shares": 1060000, "val": 296047400.0, "sector": "\u5176\u4ed6 / \u672a\u5206\u985e"}, "META": {"shares": 370000, "val": 271720600.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "VST": {"shares": 1245000, "val": 243920400.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "MSFT": {"shares": 462500, "val": 239551875.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "PDD HOLDINGS INC": {"shares": 1800000, "val": 237906000.0, "sector": "\u96f6\u552e\u696d"}, "UBER": {"shares": 2406983, "val": 235812125.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "JD": {"shares": 6225000, "val": 217750500.0, "sector": "\u96f6\u552e\u696d"}, "QCOM": {"shares": 1245000, "val": 207118200.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "AMD": {"shares": 950000, "val": 153700500.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "BAIDU INC": {"shares": 1045000, "val": 137699650.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "DBK.DE": {"shares": 3790000, "val": 134203900.0, "sector": "\u91d1\u878d\u696d"}, "GLW": {"shares": 1625000, "val": 133298750.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "LYFT": {"shares": 5600000, "val": 123256000.0, "sector": "\u904b\u8f38\u696d"}, "FISV": {"shares": 925000, "val": 119260250.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "AAL": {"shares": 9250000, "val": 103970000.0, "sector": "\u904b\u8f38\u696d"}, "LHX": {"shares": 300000, "val": 91623000.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "RTX": {"shares": 509500, "val": 85254635.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "ET": {"shares": 4957235, "val": 85066153.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "MU": {"shares": 500000, "val": 83660000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "UNH": {"shares": 203500, "val": 70268550.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "TFC": {"shares": 1387500, "val": 63436500.0, "sector": "\u91d1\u878d\u696d"}, "ASML": {"shares": 64000, "val": 61957760.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "CZR": {"shares": 2100000, "val": 56752500.0, "sector": "\u6d88\u8cbb\u8005\u670d\u52d9"}, "IQV": {"shares": 285000, "val": 54132900.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "LRCX": {"shares": 370000, "val": 49543000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "FXI": {"shares": 1110000, "val": 45665400.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "UAL": {"shares": 462500, "val": 44631250.0, "sector": "\u904b\u8f38\u696d"}, "GT": {"shares": 5140000, "val": 38447200.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "KEY": {"shares": 2020000, "val": 37753800.0, "sector": "\u91d1\u878d\u696d"}, "CFG": {"shares": 600000, "val": 31896000.0, "sector": "\u91d1\u878d\u696d"}, "COMERICA INC": {"shares": 462500, "val": 31690500.0, "sector": "\u91d1\u878d\u696d"}, "XYZ": {"shares": 370000, "val": 26739900.0, "sector": "\u5176\u4ed6 / \u672a\u5206\u985e"}, "MPLX": {"shares": 535000, "val": 26723250.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "DAL": {"shares": 462500, "val": 26246875.0, "sector": "\u904b\u8f38\u696d"}, "OC": {"shares": 161500, "val": 22845790.0, "sector": "\u5de5\u696d\u8207\u88fd\u9020"}, "MHK": {"shares": 161500, "val": 20820580.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "WAL": {"shares": 195000, "val": 16910400.0, "sector": "\u91d1\u878d\u696d"}, "ZION": {"shares": 285000, "val": 16125300.0, "sector": "\u91d1\u878d\u696d"}}}, {"date": "2025-06-30", "holdings": {"BABA": {"shares": 7067271, "val": 801499204.0, "sector": "\u96f6\u552e\u696d"}, "UNH": {"shares": 2450000, "val": 764326500.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "AMZN": {"shares": 2700000, "val": 592353000.0, "sector": "\u96f6\u552e\u696d"}, "VST": {"shares": 1800000, "val": 348858000.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "NRG": {"shares": 1980000, "val": 317948400.0, "sector": "\u516c\u7528\u4e8b\u696d"}, "META": {"shares": 400000, "val": 295236000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "NVDA": {"shares": 1750000, "val": 276482500.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "GOOG": {"shares": 1500000, "val": 266085000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "UBER": {"shares": 2750000, "val": 256575000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "MSFT": {"shares": 500000, "val": 248705000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "0LCV.IL": {"shares": 1025000, "val": 232152250.0, "sector": "\u5176\u4ed6 / \u672a\u5206\u985e"}, "JD": {"shares": 7000000, "val": 228480000.0, "sector": "\u96f6\u552e\u696d"}, "PDD HOLDINGS INC": {"shares": 2000000, "val": 209320000.0, "sector": "\u96f6\u552e\u696d"}, "INTC": {"shares": 8000000, "val": 179200000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "KWEB": {"shares": 4000000, "val": 137320000.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "LYFT": {"shares": 8000000, "val": 126080000.0, "sector": "\u904b\u8f38\u696d"}, "DBK.DE": {"shares": 4000000, "val": 117120000.0, "sector": "\u91d1\u878d\u696d"}, "MU": {"shares": 825000, "val": 101681250.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "GLW": {"shares": 1750000, "val": 92032500.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "ET": {"shares": 4957235, "val": 89874671.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "LHX": {"shares": 350000, "val": 87794000.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "RTX": {"shares": 585000, "val": 85421700.0, "sector": "\u822a\u592a\u8207\u570b\u9632"}, "CZR": {"shares": 2100000, "val": 59619000.0, "sector": "\u6d88\u8cbb\u8005\u670d\u52d9"}, "ASML": {"shares": 70000, "val": 56097300.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "QCOM": {"shares": 350000, "val": 55741000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "BAIDU INC": {"shares": 625000, "val": 53600000.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "IQV": {"shares": 300000, "val": 47277000.0, "sector": "\u5065\u5eb7\u79d1\u6280"}, "UAL": {"shares": 550000, "val": 43796500.0, "sector": "\u904b\u8f38\u696d"}, "XYZ": {"shares": 641800, "val": 43597474.0, "sector": "\u5176\u4ed6 / \u672a\u5206\u985e"}, "LRCX": {"shares": 400000, "val": 38936000.0, "sector": "\u96fb\u5b50\u79d1\u6280"}, "FXI": {"shares": 1000000, "val": 36760000.0, "sector": "ETF / \u5927\u76e4\u6307\u6578"}, "ORCL": {"shares": 150000, "val": 32794500.0, "sector": "\u79d1\u6280\u670d\u52d9"}, "MPLX": {"shares": 578500, "val": 29798535.0, "sector": "\u80fd\u6e90\u7926\u7522"}, "DAL": {"shares": 550000, "val": 27049000.0, "sector": "\u904b\u8f38\u696d"}, "WHR": {"shares": 266092, "val": 26987051.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "BEKE": {"shares": 1500000, "val": 26610000.0, "sector": "\u4e0d\u52d5\u7522 (REITs)"}, "GT": {"shares": 861782, "val": 8936679.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}, "MHK": {"shares": 65000, "val": 6814600.0, "sector": "\u8010\u7528\u6d88\u8cbb\u54c1"}}}];
+let currentDiffs = [];
+let currentSortCol = 'absChangeShares';
+let currentSortDir = -1;
+
+function initCompare() {
+    let html = '';
+    rawPeriods.forEach((p, i) => {
+        html += `<option value="${i}">${p.date}</option>`;
+    });
+    const latestSelect = document.getElementById('comp-latest');
+    const oldSelect = document.getElementById('comp-old');
+    if(latestSelect && oldSelect) {
+        latestSelect.innerHTML = html;
+        oldSelect.innerHTML = html;
+        if(rawPeriods.length > 1) {
+            latestSelect.value = 0;
+            oldSelect.value = 1;
+        }
+        updateCompare();
+    }
+}
+
+function updateCompare() {
+    const idxNew = parseInt(document.getElementById('comp-latest').value);
+    const idxOld = parseInt(document.getElementById('comp-old').value);
+    if(isNaN(idxNew) || isNaN(idxOld)) return;
+    
+    const pNew = rawPeriods[idxNew].holdings;
+    const pOld = rawPeriods[idxOld].holdings;
+    
+    const allKeys = new Set([...Object.keys(pNew), ...Object.keys(pOld)]);
+    currentDiffs = [];
+    
+    allKeys.forEach(k => {
+        const sNew = pNew[k] ? pNew[k].shares : 0;
+        const sOld = pOld[k] ? pOld[k].shares : 0;
+        const vNew = pNew[k] ? pNew[k].val : 0;
+        
+        if (sNew === sOld && sNew === 0) return;
+        if (sNew === sOld) return; // Only show changed positions
+        
+        let status = "UNCHANGED";
+        if(sOld === 0 && sNew > 0) status = "NEW";
+        else if(sNew === 0 && sOld > 0) status = "LIQUIDATED";
+        else if(sNew > sOld) status = "INCREASED";
+        else if(sNew < sOld) status = "DECREASED";
+        
+        const changeShares = sNew - sOld;
+        const pct = sOld > 0 ? (changeShares / sOld * 100) : 0;
+        const sector = pNew[k] ? pNew[k].sector : (pOld[k] ? pOld[k].sector : "其他 / 未分類");
+        
+        currentDiffs.push({
+            ticker: k,
+            sector: sector,
+            sOld, sNew, changeShares, absChangeShares: Math.abs(changeShares), vNew, pct, status
+        });
+    });
+    
+    const uniqueSectors = [...new Set(currentDiffs.map(d => d.sector))].sort();
+    const sectorSelect = document.getElementById('comp-sector');
+    if (sectorSelect) {
+        const currentVal = sectorSelect.value;
+        let html = '<option value="ALL">全部 (All)</option>';
+        uniqueSectors.forEach(s => {
+            html += `<option value="${s}">${s}</option>`;
+        });
+        sectorSelect.innerHTML = html;
+        if(uniqueSectors.includes(currentVal)) {
+            sectorSelect.value = currentVal;
+        }
+    }
+    
+    renderCompare();
+}
+
+function handleSort(col) {
+    if(currentSortCol === col) {
+        currentSortDir *= -1;
+    } else {
+        currentSortCol = col;
+        currentSortDir = -1;
+    }
+    renderCompare();
+}
+
+function renderCompare() {
+    const searchVal = (document.getElementById('comp-search').value || '').toLowerCase();
+    const statusVal = document.getElementById('comp-status').value || 'ALL';
+    const assetSelect = document.getElementById('comp-asset');
+    const assetVal = assetSelect ? assetSelect.value : 'ALL';
+    const sectorSelect = document.getElementById('comp-sector');
+    const sectorVal = sectorSelect ? sectorSelect.value : 'ALL';
+    
+    let filtered = currentDiffs.filter(d => {
+        if(statusVal !== 'ALL' && d.status !== statusVal) return false;
+        if(sectorVal !== 'ALL' && d.sector !== sectorVal) return false;
+        if(searchVal && !d.ticker.toLowerCase().includes(searchVal)) return false;
+        if(assetVal !== 'ALL') {
+            const isCall = d.ticker.includes('(CALL)');
+            const isPut = d.ticker.includes('(PUT)');
+            const isOptions = isCall || isPut;
+            
+            if(assetVal === 'COMMON' && isOptions) return false;
+            if(assetVal === 'OPTIONS' && !isOptions) return false;
+            if(assetVal === 'CALL' && !isCall) return false;
+            if(assetVal === 'PUT' && !isPut) return false;
+        }
+        return true;
+    });
+    
+    filtered.sort((a, b) => {
+        let valA = a[currentSortCol];
+        let valB = b[currentSortCol];
+        
+        if(typeof valA === 'string' && typeof valB === 'string') {
+            return valA.localeCompare(valB) * currentSortDir;
+        }
+        
+        if(valA < valB) return -1 * currentSortDir;
+        if(valA > valB) return 1 * currentSortDir;
+        return 0;
+    });
+    
+    const headers = document.querySelectorAll('#comp-table th.sortable');
+    headers.forEach(th => {
+        th.innerHTML = th.innerHTML.replace(' 🔼', '').replace(' 🔽', '');
+        if(th.getAttribute('data-sort') === currentSortCol || (currentSortCol === 'absChangeShares' && th.getAttribute('data-sort') === 'changeShares')) {
+            th.innerHTML += currentSortDir === 1 ? ' 🔼' : ' 🔽';
+        }
+    });
+    
+    let html = '';
+    filtered.forEach(d => {
+        let color = '#fff';
+        if(d.status === 'NEW' || d.status === 'INCREASED') color = '#10b981';
+        if(d.status === 'LIQUIDATED' || d.status === 'DECREASED') color = '#f43f5e';
+        
+        const pctStr = d.status === 'NEW' ? 'N/A' : (d.pct > 0 ? '+' : '') + d.pct.toFixed(1) + '%';
+        const sign = d.changeShares > 0 ? '+' : '';
+        const vNewStr = d.vNew >= 1e12 ? `$${(d.vNew/1e12).toFixed(2)}T` : (d.vNew >= 1e9 ? `$${(d.vNew/1e9).toFixed(2)}B` : `$${(d.vNew/1e6).toFixed(1)}M`);
+        
+        html += `<tr>
+            <td style="font-weight:bold;">${d.ticker}</td>
+            <td style="color:#9ca3af; font-size:0.85rem;">${d.sector}</td>
+            <td>${d.sOld.toLocaleString()}</td>
+            <td>${d.sNew.toLocaleString()}</td>
+            <td style="color:${color}; font-weight:bold;">${sign}${d.changeShares.toLocaleString()}</td>
+            <td>${d.vNew > 0 ? vNewStr : '-'}</td>
+            <td style="color:${color}; font-weight:bold;">${pctStr}</td>
+            <td><span class="ticker" style="color:${color}; border:1px solid ${color}; padding:2px 6px; border-radius:4px; font-size:10px;">${d.status}</span></td>
+        </tr>`;
+    });
+    const tbody = document.getElementById('comp-tbody');
+    if(tbody) tbody.innerHTML = html;
+}
+
+document.addEventListener('DOMContentLoaded', initCompare);
+
+// ═══ Heatmap: Capital Flow Treemap + Smart Money Mode ═══
+const ETF_SECTORS = ['ETF / 大盤指數', 'ETF / 避險與債券'];
+
+function initHeatmap() {
+    const latestSel = document.getElementById('hm-latest');
+    const oldSel = document.getElementById('hm-old');
+    if(!latestSel || !oldSel) return;
+    let html = '';
+    rawPeriods.forEach((p, i) => {
+        html += `<option value="${i}">${p.date}</option>`;
+    });
+    latestSel.innerHTML = html;
+    oldSel.innerHTML = html;
+    if(rawPeriods.length > 1) { latestSel.value = 0; oldSel.value = 1; }
+    updateHeatmap();
+}
+
+function updateHeatmap() {
+    const idxNew = parseInt(document.getElementById('hm-latest').value);
+    const idxOld = parseInt(document.getElementById('hm-old').value);
+    const smartMode = document.getElementById('hm-smart').checked;
+    const hintEl = document.getElementById('hm-smart-hint');
+    if(hintEl) hintEl.style.display = smartMode ? 'inline' : 'none';
+    if(isNaN(idxNew) || isNaN(idxOld)) return;
+    const pNew = rawPeriods[idxNew].holdings;
+    const pOld = rawPeriods[idxOld].holdings;
+
+    // Aggregate by sector
+    const sectorFlows = {};
+    const allKeys = new Set([...Object.keys(pNew), ...Object.keys(pOld)]);
+    allKeys.forEach(k => {
+        const info = pNew[k] || pOld[k];
+        const sector = info.sector || '其他 / 未分類';
+        if(smartMode && ETF_SECTORS.includes(sector)) return;
+        if(!sectorFlows[sector]) sectorFlows[sector] = { newVal:0, oldVal:0, newShares:0, oldShares:0 };
+        sectorFlows[sector].newVal += pNew[k] ? pNew[k].val : 0;
+        sectorFlows[sector].oldVal += pOld[k] ? pOld[k].val : 0;
+        sectorFlows[sector].newShares += pNew[k] ? pNew[k].shares : 0;
+        sectorFlows[sector].oldShares += pOld[k] ? pOld[k].shares : 0;
+    });
+
+    // Compute metrics
+    const sectors = Object.entries(sectorFlows).map(([name, d]) => {
+        const valDelta = d.newVal - d.oldVal;
+        const valPct = d.oldVal > 0 ? (valDelta / d.oldVal * 100) : (d.newVal > 0 ? 100 : 0);
+        const sharesPct = d.oldShares > 0 ? ((d.newShares - d.oldShares) / d.oldShares * 100) : 0;
+        const displayPct = smartMode ? sharesPct : valPct;
+        const displayDelta = smartMode ? (d.newShares - d.oldShares) : valDelta;
+        return { name, newVal: d.newVal, delta: valDelta, pct: displayPct, rawDelta: displayDelta, size: Math.max(d.newVal, d.oldVal) };
+    });
+    sectors.sort((a, b) => b.size - a.size);
+
+    const totalSize = sectors.reduce((s, x) => s + x.size, 0);
+    if(totalSize === 0) {
+        document.getElementById('heatmap-container').innerHTML = '<p style="color:#6b7280;text-align:center;padding:2rem;">無足夠資料生成熱力圖</p>';
+        return;
+    }
+
+    // Build treemap HTML
+    let html = '<div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); gap:6px; grid-auto-rows:minmax(80px, auto);">';
+    sectors.forEach(s => {
+        const sizePct = s.size / totalSize * 100;
+        const span = sizePct > 25 ? 3 : (sizePct > 12 ? 2 : 1);
+        const rowSpan = sizePct > 30 ? 2 : 1;
+        const bg = getFlowColor(s.pct);
+        const arrow = s.pct > 0 ? '↑' : (s.pct < 0 ? '↓' : '↔');
+        const sign = s.pct > 0 ? '+' : '';
+        const fmtDelta = smartMode
+            ? `${sign}${s.rawDelta.toLocaleString()} 股`
+            : (Math.abs(s.delta) >= 1e9 ? `${sign}$${(s.delta/1e9).toFixed(2)}B` : `${sign}$${(s.delta/1e6).toFixed(0)}M`);
+        const fmtVal = s.newVal >= 1e9 ? `$${(s.newVal/1e9).toFixed(1)}B` : `$${(s.newVal/1e6).toFixed(0)}M`;
+        html += `<div class="hm-block" style="grid-column:span ${span};grid-row:span ${rowSpan};background:${bg};">
+            <div style="font-weight:700;font-size:${span>=2?'1rem':'0.85rem'};color:#fff;">${s.name}</div>
+            <div style="font-size:${span>=2?'1.2rem':'0.95rem'};font-weight:700;color:#fff;margin-top:4px;">${sign}${s.pct.toFixed(1)}% ${arrow}</div>
+            <div style="font-size:0.75rem;color:rgba(255,255,255,.7);margin-top:2px;">${fmtDelta}</div>
+            <div class="hm-tooltip">
+                <div style="font-weight:600;margin-bottom:4px;">${s.name}</div>
+                <div>當前規模: ${fmtVal}</div>
+                <div>淨變動: ${fmtDelta} (${sign}${s.pct.toFixed(1)}%)</div>
+                <div style="color:#9ca3af;font-size:0.75rem;margin-top:2px;">佔比: ${(s.size/totalSize*100).toFixed(1)}%${smartMode ? ' (Smart Money)' : ''}</div>
+            </div>
+        </div>`;
+    });
+    html += '</div>';
+    document.getElementById('heatmap-container').innerHTML = html;
+}
+
+function getFlowColor(pct) {
+    if(pct > 20) return 'linear-gradient(135deg, #166534, #15803d)';
+    if(pct > 5) return 'linear-gradient(135deg, #15803d, #22c55e80)';
+    if(pct > -5) return '#334155';
+    if(pct > -20) return 'linear-gradient(135deg, #dc262680, #ef4444)';
+    return 'linear-gradient(135deg, #7f1d1d, #991b1b)';
+}
+
+document.addEventListener('DOMContentLoaded', initHeatmap);
+
+// Generic table sorter for individual period tabs
+function sortTable(thElement, tableId, colIndex, isNumber, isFormattedVal) {
+    const table = document.getElementById(tableId);
+    if(!table) return;
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    let dir = thElement.getAttribute('data-dir') === 'asc' ? -1 : 1;
+    thElement.setAttribute('data-dir', dir === -1 ? 'desc' : 'asc');
+    
+    // Clear arrows from siblings
+    thElement.parentElement.querySelectorAll('th').forEach(th => th.innerHTML = th.innerHTML.replace(' 🔼', '').replace(' 🔽', ''));
+    thElement.innerHTML += dir === 1 ? ' 🔼' : ' 🔽';
+    
+    rows.sort((a, b) => {
+        let valA = a.children[colIndex].innerText.replace(/,/g, '').replace('%', '').trim();
+        let valB = b.children[colIndex].innerText.replace(/,/g, '').replace('%', '').trim();
+        
+        if(isFormattedVal) {
+            const parseVal = (str) => {
+                let v = parseFloat(str.replace(/[^0-9.-]/g, ''));
+                if(str.includes('T')) v *= 1e12;
+    if(str.includes('B')) v *= 1e9;
+                else if(str.includes('M')) v *= 1e6;
+                return isNaN(v) ? 0 : v;
+            };
+            valA = parseVal(valA);
+            valB = parseVal(valB);
+        } else if(isNumber) {
+            valA = parseFloat(valA) || 0;
+            valB = parseFloat(valB) || 0;
+        } else {
+            valA = valA.toLowerCase();
+            valB = valB.toLowerCase();
+            if (valA < valB) return -1 * dir;
+            if (valA > valB) return 1 * dir;
+            return 0;
+        }
+        
+        if (valA < valB) return -1 * dir;
+        if (valA > valB) return 1 * dir;
+        return 0;
+    });
+    
+    tbody.innerHTML = '';
+    rows.forEach(r => tbody.appendChild(r));
+    
+    // Re-assign row numbers if the first column is '#'
+    if(colIndex !== 0 && table.querySelector('th').innerText.includes('#')) {
+        Array.from(tbody.querySelectorAll('tr')).forEach((r, idx) => {
+            r.children[0].innerText = idx + 1;
+        });
+    }
+}
+
+function filterPeriodTabs(idx) {
+    const input = document.getElementById(`search-period-${idx}`).value.toLowerCase();
+    const tables = document.querySelectorAll(`#tab-${idx} table`);
+    tables.forEach(table => {
+        const rows = table.querySelectorAll('tbody tr');
+        rows.forEach(row => {
+            const ticker = row.children[1].innerText.toLowerCase();
+            row.style.display = ticker.includes(input) ? '' : 'none';
+        });
+    });
+}
+
+// Initialize Chart
+const ctx = document.getElementById('aumChart');
+if(ctx) {
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: ["2025-06-30", "2025-09-30", "2025-12-31", "2026-03-31"],
+            datasets: [{
+                label: 'AUM (Billions USD)',
+                data: [6.448959614, 7.383589018, 6.92502065, 5.933477986],
+                borderColor: '#3b82f6',
+                backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                borderWidth: 3,
+                pointBackgroundColor: '#3b82f6',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: '#3b82f6',
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: { color: '#f3f4f6' }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false,
+                }
+            },
+            scales: {
+                y: {
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9ca3af' }
+                },
+                x: {
+                    grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                    ticks: { color: '#9ca3af' }
+                }
+            }
+        }
+    });
+}
+</script>
+</body>
+</html>
