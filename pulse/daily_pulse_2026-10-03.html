@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日市場脈搏 — 2026-10-03</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { background:#0b0f19; color:#f3f4f6; font-family:'Outfit','Noto Sans TC',sans-serif; line-height:1.6; padding:2rem; }
+.container { max-width:1200px; margin:0 auto; }
+
+/* Hero */
+.hero {
+    background:linear-gradient(135deg,rgba(22,30,49,.9),rgba(13,18,30,.9));
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px; padding:3rem; margin-bottom:2rem;
+    position:relative; overflow:hidden;
+}
+.hero::before {
+    content:''; position:absolute; top:-50%; right:-20%;
+    width:400px; height:400px;
+    background:radial-gradient(circle,rgba(59,130,246,.15),transparent 70%);
+    pointer-events:none;
+}
+.hero h1 { font-size:2.2rem; font-weight:700; margin-bottom:.4rem; }
+.hero .subtitle { color:#9ca3af; font-size:1.05rem; }
+.badge {
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:rgba(59,130,246,.15); border:1px solid rgba(59,130,246,.3);
+    padding:.35rem .9rem; border-radius:100px;
+    font-size:.8rem; font-weight:600; color:#3b82f6; margin-bottom:1.2rem;
+}
+
+/* Section card */
+.section {
+    background:rgba(22,30,49,.7); border:1px solid rgba(255,255,255,.08);
+    border-radius:20px; padding:2rem; margin-bottom:1.5rem;
+    backdrop-filter:blur(12px);
+    overflow-x:auto;
+}
+.section h2 {
+    font-size:1.35rem; font-weight:600; margin-bottom:1.2rem;
+    display:flex; align-items:center; gap:.6rem;
+    border-bottom:1px solid rgba(255,255,255,.05); padding-bottom:.8rem;
+}
+
+/* Tables */
+table { width:100%; border-collapse:collapse; font-size:.95rem; }
+th {
+    color:#9ca3af; font-weight:500; padding:.7rem .8rem;
+    border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:.75rem; text-transform:uppercase; letter-spacing:.5px;
+    text-align:left;
+}
+td { padding:.7rem .8rem; border-bottom:1px solid rgba(255,255,255,.04); }
+tr:hover td { background:rgba(255,255,255,.02); }
+
+.ticker-badge {
+    display:inline-block; font-weight:700; padding:.2rem .5rem;
+    border-radius:6px; font-size:.8rem;
+    background:rgba(59,130,246,.15); color:#3b82f6;
+    border:1px solid rgba(59,130,246,.3);
+}
+
+/* Sector bars */
+.sector-row {
+    display:grid; grid-template-columns:160px 1fr 80px;
+    align-items:center; gap:.8rem; margin-bottom:.6rem;
+}
+.sector-label { font-size:.9rem; font-weight:500; white-space:nowrap; }
+.sector-bar-container {
+    height:14px; background:rgba(255,255,255,.05); border-radius:7px;
+    overflow:hidden;
+}
+.sector-bar { height:100%; border-radius:7px; transition:width .4s ease; }
+.sector-value { font-size:.9rem; font-weight:600; text-align:right; }
+
+/* Two-column layout */
+.grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; }
+@media (max-width:768px) {
+    body { padding:1rem; }
+    .hero { padding:1.5rem; }
+    .hero h1 { font-size:1.6rem; }
+    .grid-2 { grid-template-columns:1fr; }
+    .sector-row { grid-template-columns:120px 1fr 60px; }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width:8px; height:8px; }
+::-webkit-scrollbar-track { background:#0f172a; border-radius:4px; }
+::-webkit-scrollbar-thumb { background:#334155; border-radius:4px; }
+::-webkit-scrollbar-thumb:hover { background:#475569; }
+* { scrollbar-width:thin; scrollbar-color:#334155 #0f172a; }
+
+.footer {
+    text-align:center; color:#6b7280; font-size:.8rem;
+    margin-top:2rem; padding-top:1.5rem;
+    border-top:1px solid rgba(255,255,255,.05);
+}
+a { color:#3b82f6; text-decoration:none; }
+a:hover { text-decoration:underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+    <!-- Hero -->
+    <div class="hero">
+        <span class="badge">📊 Daily Pulse</span>
+        <h1>📊 每日市場脈搏</h1>
+        <p class="subtitle">2026-10-03 — Whale Tracker 市場摘要報告</p>
+    </div>
+
+    <!-- 1. Macro Dashboard -->
+    <div class="section">
+        <h2>🌍 總經儀表板 (今日表現)</h2>
+        <table>
+            <thead>
+                <tr><th>指標</th><th>價格</th><th>漲跌幅</th><th></th></tr>
+            </thead>
+            <tbody><tr>
+            <td>S&amp;P 500</td>
+            <td style="font-weight:600;">7,722.7</td>
+            <td style="color:#10b981;font-weight:600;">+0.73%</td>
+            <td style="color:#10b981;font-size:1.1rem;">▲</td>
+        </tr><tr>
+            <td>NASDAQ</td>
+            <td style="font-weight:600;">27,191</td>
+            <td style="color:#10b981;font-weight:600;">+1.19%</td>
+            <td style="color:#10b981;font-size:1.1rem;">▲</td>
+        </tr><tr>
+            <td>VIX</td>
+            <td style="font-weight:600;">15.31</td>
+            <td style="color:#f43f5e;font-weight:600;">-6.59%</td>
+            <td style="color:#f43f5e;font-size:1.1rem;">▼</td>
+        </tr><tr>
+            <td>10Y 國債</td>
+            <td style="font-weight:600;">5.28</td>
+            <td style="color:#10b981;font-weight:600;">+0.76%</td>
+            <td style="color:#10b981;font-size:1.1rem;">▲</td>
+        </tr><tr>
+            <td>美元指數</td>
+            <td style="font-weight:600;">101.9</td>
+            <td style="color:#f43f5e;font-weight:600;">-0.17%</td>
+            <td style="color:#f43f5e;font-size:1.1rem;">▼</td>
+        </tr><tr>
+            <td>黃金</td>
+            <td style="font-weight:600;">4,162.3</td>
+            <td style="color:#f43f5e;font-weight:600;">-0.95%</td>
+            <td style="color:#f43f5e;font-size:1.1rem;">▼</td>
+        </tr><tr>
+            <td>BTC</td>
+            <td style="font-weight:600;">84,857</td>
+            <td style="color:#10b981;font-weight:600;">+0.43%</td>
+            <td style="color:#10b981;font-size:1.1rem;">▲</td>
+        </tr></tbody>
+        </table>
+    </div>
+
+    <!-- 2. Whale movers -->
+    <div class="grid-2">
+        <div class="section">
+            <h2>🟢 鯨魚持股漲幅榜 (Top 10)</h2>
+            <table>
+                <thead><tr><th>#</th><th>標的</th><th>漲跌幅</th><th>持有機構</th></tr></thead>
+                <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker-badge">SDEV</span></td>
+                <td style="color:#10b981;font-weight:600;">+104.37%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock</td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker-badge">XRPN</span></td>
+                <td style="color:#10b981;font-weight:600;">+68.25%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Millennium, Citadel</td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker-badge">ZNB</span></td>
+                <td style="color:#10b981;font-weight:600;">+45.28%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker-badge">QTEX</span></td>
+                <td style="color:#10b981;font-weight:600;">+40.13%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker-badge">REBN</span></td>
+                <td style="color:#10b981;font-weight:600;">+26.01%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker-badge">ICU</span></td>
+                <td style="color:#10b981;font-weight:600;">+25.07%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock</td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker-badge">NAUT</span></td>
+                <td style="color:#10b981;font-weight:600;">+24.84%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock, Millennium, Citadel</td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker-badge">NNBR</span></td>
+                <td style="color:#10b981;font-weight:600;">+24.24%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock, Millennium, Citadel</td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker-badge">NEOV</span></td>
+                <td style="color:#10b981;font-weight:600;">+21.03%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock, Citadel</td>
+            </tr><tr>
+                <td>10</td>
+                <td><span class="ticker-badge">FEAM</span></td>
+                <td style="color:#10b981;font-weight:600;">+20.12%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock, Citadel</td>
+            </tr></tbody>
+            </table>
+        </div>
+        <div class="section">
+            <h2>🔴 鯨魚持股跌幅榜 (Top 10)</h2>
+            <table>
+                <thead><tr><th>#</th><th>標的</th><th>漲跌幅</th><th>持有機構</th></tr></thead>
+                <tbody><tr>
+                <td>1</td>
+                <td><span class="ticker-badge">FHTX</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-30.82%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock, Millennium, Citadel</td>
+            </tr><tr>
+                <td>2</td>
+                <td><span class="ticker-badge">NXL</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-24.11%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>3</td>
+                <td><span class="ticker-badge">IART</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-21.19%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock, Millennium</td>
+            </tr><tr>
+                <td>4</td>
+                <td><span class="ticker-badge">STXL</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-20.69%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>5</td>
+                <td><span class="ticker-badge">WDCX</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-20.15%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>6</td>
+                <td><span class="ticker-badge">STXX</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-20.10%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>7</td>
+                <td><span class="ticker-badge">VIOT</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-17.89%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">BlackRock</td>
+            </tr><tr>
+                <td>8</td>
+                <td><span class="ticker-badge">KBSX</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-15.70%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>9</td>
+                <td><span class="ticker-badge">GLND</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-15.23%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr><tr>
+                <td>10</td>
+                <td><span class="ticker-badge">LRHC</span></td>
+                <td style="color:#f43f5e;font-weight:600;">-15.22%</td>
+                <td style="color:#9ca3af;font-size:.85rem;">Citadel</td>
+            </tr></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 3. Sector performance -->
+    <div class="section">
+        <h2>🏭 板塊表現 (今日)</h2>
+        
+        <div class="sector-row">
+            <div class="sector-label">非必需消費 <span style="color:#6b7280;">(XLY)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:100.0%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+1.13%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">科技 <span style="color:#6b7280;">(XLK)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:89.4%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+1.01%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">工業 <span style="color:#6b7280;">(XLI)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:68.7%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.78%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">原物料 <span style="color:#6b7280;">(XLB)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:58.3%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.66%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">公用事業 <span style="color:#6b7280;">(XLU)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:33.4%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.38%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">通訊服務 <span style="color:#6b7280;">(XLC)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:30.6%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.35%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">房地產 <span style="color:#6b7280;">(XLRE)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:28.3%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.32%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">必需消費 <span style="color:#6b7280;">(XLP)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:22.0%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.25%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">能源 <span style="color:#6b7280;">(XLE)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:16.9%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.19%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">金融 <span style="color:#6b7280;">(XLF)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:5.0%;background:#10b981;float:right;"></div>
+            </div>
+            <div class="sector-value" style="color:#10b981;">+0.06%</div>
+        </div>
+        <div class="sector-row">
+            <div class="sector-label">醫療保健 <span style="color:#6b7280;">(XLV)</span></div>
+            <div class="sector-bar-container">
+                <div class="sector-bar" style="width:1.1%;background:#f43f5e;float:left;"></div>
+            </div>
+            <div class="sector-value" style="color:#f43f5e;">-0.01%</div>
+        </div>
+    </div>
+
+    
+        <div class="section">
+            <h2>📰 AI 今日財經要聞與情緒分析</h2>
+            <div style="background:rgba(255,255,255,0.02); padding:1.5rem; border-radius:12px; border:1px solid rgba(255,255,255,0.05); font-size:0.95rem; line-height:1.8;">
+                <h3>今日市場情緒總結</h3>
+<p>市場情緒呈現<strong>「科技領軍的極度樂觀與風險偏好擴張」</strong>。核心焦點在於非農就業數據爆冷引發的聯準會升息放緩預期，疊加台積電先進製程產能滿載、記憶體大廠營收暴增等強勁 AI 基本面，激發了科技股與半導體板塊的強烈多頭動能。</p>
+<hr />
+<h3>今日核心要聞與解析</h3>
+<ol>
+<li><strong>美國非農就業數據爆冷，聯準會升息預期放緩，那指周線喜提連三紅</strong></li>
+<li>
+<p><strong>趨勢解析</strong>：勞動市場降溫減輕了聯準會持續鷹派的壓力，市場預期資金成本上升的空間受限，直接有利於高成長、高估值的科技巨頭進行評價修復，為美股多頭奠定流動性基礎。</p>
+</li>
+<li>
+<p><strong>台積電傳與馬斯克 Terafab 探索德州合作，先進製程產能預計滿載至 2028 年</strong></p>
+</li>
+<li>
+<p><strong>趨勢解析</strong>：台積電作為「AI 守門人」的地位無可動搖。若與馬斯克生態系（Tesla、xAI 等）達成深度合作，將進一步鎖定非傳統晶片設計大廠的客製化晶片（ASIC）龐大商機，穩固其全球晶圓代工超過 75% 的主導地位。</p>
+</li>
+<li>
+<p><strong>記憶體大廠美光單季營收暴增 379%，高層指出 AI 與機器人正啟動長約與共同開發潮</strong></p>
+</li>
+<li>
+<p><strong>趨勢解析</strong>：AI 需求已實質外溢至儲存與記憶體端，人形機器人對 DRAM/NAND 的高容量需求將徹底改寫記憶體產業的週期。這顯示半導體復甦並非僅限於 GPU，而是全板塊的結構性擴張。</p>
+</li>
+<li>
+<p><strong>隱密訊號顯示美債拋售潮可能接近尾聲，全球債市壓力可望階段性喘息</strong></p>
+</li>
+<li><strong>趨勢解析</strong>：若高企的美債殖利率能自高檔回落，將大幅緩解全球風險資產的評價壓力，並促使部分避險資金重新配置回權益市場與長天期資產。</li>
+</ol>
+<hr />
+<h3>個人持倉影響評估</h3>
+<h4>【長期持有（核心部位）】</h4>
+<ul>
+<li><strong>TSM（台積電 ADR）</strong><ul>
+<li><strong>評估：極度利多</strong></li>
+<li><strong>原因</strong>：受惠於與馬斯克 Terafab 的潛在德州合作傳聞，加上外資在法說會前一致看好其 2 奈米良率與高達 2028 年的產能能見度。台積電在 AI 產業的定價權與護城河持續加深，將帶動 ADR 估值進一步上修。</li>
+</ul>
+</li>
+<li><strong>NVDA（輝達）</strong><ul>
+<li><strong>評估：利多</strong></li>
+<li><strong>原因</strong>：美光強勁財報與對 AI/機器人硬體需求的樂觀展望，再次驗證下游對 AI 運算晶片的飢渴程度。此外，黃仁勳與三星李在鎔等亞洲半導體大佬的頻繁互動，顯示供應鏈合作緊密，有利於輝達持續維持供應順暢。</li>
+</ul>
+</li>
+<li><strong>TSLA（特斯拉）</strong><ul>
+<li><strong>評估：利多</strong></li>
+<li><strong>原因</strong>：馬斯克證實與台積電探索 Terafab 合作，此舉有望確保特斯拉未來在 FSD（全自動駕駛）晶片及 Dojo 超級電腦的先進製程產能，降低地緣政治與供應鏈斷鏈風險，市場對其 AI/自駕車願景的信心將顯著提升。</li>
+</ul>
+</li>
+<li><strong>GOOGL（Alphabet）</strong><ul>
+<li><strong>評估：利多</strong></li>
+<li><strong>原因</strong>：非農數據爆冷導致聯準會升息預期降溫，利率環境的相對寬鬆對 Google 這種依賴廣告與雲端成長的大型科技股而言是直接的估值利多。</li>
+</ul>
+</li>
+<li><strong>SOXQ（費城半導體 ETF） &amp; VOO（S&amp;P 500 ETF）</strong><ul>
+<li><strong>評估：利多</strong></li>
+<li><strong>原因</strong>：成分股中的台積電、輝達、美光及被動元件龍頭（如國巨等）全面迎來產業利多，且美股整體呈現科技股領漲的多頭格局，將直接拉動這兩檔指數型 ETF 的淨值表現。</li>
+</ul>
+</li>
+<li><strong>IB01 / SGOV（超短期美國公債）</strong><ul>
+<li><strong>評估：中性偏利多</strong></li>
+<li><strong>原因</strong>：升息預期放緩使短端美債收益率上行空間受限，債價獲得支撐。此部位主要作為現金流與避險配置，受短期波動影響極小，維持穩健。</li>
+</ul>
+</li>
+<li><strong>BTCUSD（比特幣）</strong><ul>
+<li><strong>評估：利多</strong></li>
+<li><strong>原因</strong>：非農就業數據不佳帶來的流動性寬鬆預期，本質上會刺激風險資本流向高彈性資產，對比特幣等加密貨幣具有流動性溢價的推升作用。</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4>【短期持有（槓桿部位，須留意每日重置與波動衰減）】</h4>
+<ul>
+<li><strong>SOXL（3 倍做多半導體）</strong><ul>
+<li><strong>評估：短期極度利多，但必須嚴防波動衰減</strong></li>
+<li><strong>原因</strong>：半導體板塊目前利多齊發，SOXL 短期內具備極強的向上爆發力。</li>
+<li><strong>⚠ 槓桿風險提示</strong>：雖然盤勢偏多，但若美債殖利率在高檔震盪、或地緣政治（如油價震盪）導致市場出現「暴漲暴跌」的震盪格局，<strong>3 倍槓桿的每日重置機制將產生嚴重的損耗（Decay）</strong>。建議此部位僅作極短線波段操作，見好即收，切忌在震盪市中長線死扛，以免即使指數沒跌、淨值卻因震盪而大幅縮水。</li>
+</ul>
+</li>
+<li><strong>SPXL（3 倍做多 S&amp;P 500）</strong><ul>
+<li><strong>評估：短期利多，須留意波動衰減</strong></li>
+<li><strong>原因</strong>：S&amp;P 500 在非農數據後的樂觀情緒中維持多頭軌道，SPXL 短期內將隨大盤穩健上行。</li>
+<li><strong>⚠ 槓桿風險提示</strong>：同樣需注意槓桿衰減風險。在大盤創新高之際，若遇到獲利回吐的震盪期，槓桿損耗將侵蝕利潤。建議設定嚴格的移動止盈點（Trailing Stop），以落袋為安為首要考量。</li>
+</ul>
+</li>
+</ul>
+            </div>
+        </div>
+
+    
+        <div class="section">
+            <h2>📅 未來兩週重要經濟事件</h2>
+            <table>
+                <thead><tr><th>日期</th><th>事件</th></tr></thead>
+                <tbody><tr>
+                <td>2026-10-13</td>
+                <td>CPI 消費者物價指數</td>
+            </tr></tbody>
+            </table>
+        </div>
+
+    <div class="footer">
+        Generated by <b>Whale Tracker — Market Pulse</b> ｜ 2026-10-03 22:20
+    </div>
+</div>
+</body>
+</html>
